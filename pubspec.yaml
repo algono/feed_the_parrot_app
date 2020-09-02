@@ -1,5 +1,6 @@
 name: feed_the_parrot
-description: A new Flutter project.
+description: App for configuring your feeds from the Feed The Parrot Alexa skill.
+author: algono
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -24,6 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  cloud_firestore: ^0.14.0+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
