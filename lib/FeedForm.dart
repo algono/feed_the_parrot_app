@@ -20,6 +20,9 @@ class _FeedFormState extends State<FeedForm> {
   final languageController = TextEditingController();
   final urlController = TextEditingController();
 
+  final itemLimitController = TextEditingController();
+  final truncateSummaryAtController = TextEditingController();
+
   String name;
   String language;
   String url;
@@ -47,12 +50,6 @@ class _FeedFormState extends State<FeedForm> {
                 decoration: InputDecoration(
                   labelText: 'Name (en)',
                 ),
-                validator: (value) {
-                  if (value.isEmpty)
-                    return 'Name (en)';
-                  else
-                    return null;
-                },
               ),
               SizedBox(height: 20.0),
               TextFormField(
@@ -63,12 +60,6 @@ class _FeedFormState extends State<FeedForm> {
                 decoration: InputDecoration(
                   labelText: 'Name (es)',
                 ),
-                validator: (value) {
-                  if (value.isEmpty)
-                    return 'Name (es)';
-                  else
-                    return null;
-                },
               ),
               SizedBox(height: 20.0),
               TextFormField(
@@ -79,12 +70,6 @@ class _FeedFormState extends State<FeedForm> {
                 decoration: InputDecoration(
                   labelText: 'Language',
                 ),
-                validator: (value) {
-                  if (value.isEmpty)
-                    return 'Language';
-                  else
-                    return null;
-                },
               ),
               SizedBox(height: 20.0),
               TextFormField(
@@ -93,11 +78,46 @@ class _FeedFormState extends State<FeedForm> {
                 autofocus: false,
                 controller: urlController,
                 decoration: InputDecoration(
-                  labelText: 'Url',
+                  labelText: 'URL',
                 ),
                 validator: (value) {
                   if (value.isEmpty)
-                    return 'Url';
+                    return 'Required';
+                  else
+                    return null;
+                },
+              ),
+              // TODO: Add form for read fields
+              SizedBox(height: 20.0),
+              TextFormField(
+                maxLines: 1,
+                keyboardType: TextInputType.number,
+                autofocus: false,
+                controller: itemLimitController,
+                decoration: InputDecoration(
+                    labelText: 'Item limit',
+                    hintText:
+                        'The maximum number of items this feed should return.'),
+                validator: (value) {
+                  if (value.isNotEmpty && int.tryParse(value) == null)
+                    return 'This should be a number';
+                  else
+                    return null;
+                },
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                maxLines: 1,
+                keyboardType: TextInputType.number,
+                autofocus: false,
+                controller: truncateSummaryAtController,
+                decoration: InputDecoration(
+                    labelText: 'Truncate summary at',
+                    hintText:
+                        'The maximum number of characters the summary should have.'),
+                validator: (value) {
+                  if (value.isNotEmpty && int.tryParse(value) == null)
+                    return 'This should be a number';
                   else
                     return null;
                 },
@@ -160,7 +180,13 @@ class _FeedFormState extends State<FeedForm> {
             nameEn: nameEnController.text,
             nameEs: nameEsController.text,
             language: languageController.text,
-            url: urlController.text)
+            url: urlController.text,
+            itemLimit: itemLimitController.text.isEmpty
+                ? null
+                : int.parse(itemLimitController.text),
+            truncateSummaryAt: truncateSummaryAtController.text.isEmpty
+                ? null
+                : int.parse(truncateSummaryAtController.text))
         .create();
   }
 
@@ -170,6 +196,13 @@ class _FeedFormState extends State<FeedForm> {
     widget.feed.language = languageController.text;
     widget.feed.url = urlController.text;
 
+    widget.feed.itemLimit = itemLimitController.text.isEmpty
+        ? null
+        : int.parse(itemLimitController.text);
+    widget.feed.truncateSummaryAt = truncateSummaryAtController.text.isEmpty
+        ? null
+        : int.parse(truncateSummaryAtController.text);
+
     return widget.feed.update();
   }
 
@@ -177,10 +210,14 @@ class _FeedFormState extends State<FeedForm> {
   void initState() {
     super.initState();
     if (widget.feed != null) {
-      nameEnController.text = widget.feed.nameEn;
-      nameEsController.text = widget.feed.nameEs;
-      languageController.text = widget.feed.language;
+      nameEnController.text = widget.feed.nameEn ?? '';
+      nameEsController.text = widget.feed.nameEs ?? '';
+      languageController.text = widget.feed.language ?? '';
       urlController.text = widget.feed.url;
+
+      itemLimitController.text = widget.feed.itemLimit?.toString() ?? '';
+      truncateSummaryAtController.text =
+          widget.feed.truncateSummaryAt?.toString() ?? '';
     }
   }
 
