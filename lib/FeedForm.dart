@@ -1,19 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'Feed.dart';
 
 class FeedForm extends StatefulWidget {
+  final User user;
   final Feed feed;
 
   String get title => (feed == null) ? "New feed" : "Edit feed";
 
-  FeedForm({this.feed});
+  FeedForm({this.user, this.feed});
   @override
   _FeedFormState createState() => _FeedFormState();
 }
 
 class _FeedFormState extends State<FeedForm> {
-  final nameController = TextEditingController();
+  final nameEnController = TextEditingController();
+  final nameEsController = TextEditingController();
   final languageController = TextEditingController();
   final urlController = TextEditingController();
 
@@ -40,10 +43,29 @@ class _FeedFormState extends State<FeedForm> {
                 maxLines: 1,
                 keyboardType: TextInputType.text,
                 autofocus: false,
-                controller: nameController,
+                controller: nameEnController,
+                decoration: InputDecoration(
+                  labelText: 'Name (en)',
+                ),
                 validator: (value) {
                   if (value.isEmpty)
-                    return 'Name';
+                    return 'Name (en)';
+                  else
+                    return null;
+                },
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                maxLines: 1,
+                keyboardType: TextInputType.text,
+                autofocus: false,
+                controller: nameEsController,
+                decoration: InputDecoration(
+                  labelText: 'Name (es)',
+                ),
+                validator: (value) {
+                  if (value.isEmpty)
+                    return 'Name (es)';
                   else
                     return null;
                 },
@@ -54,6 +76,9 @@ class _FeedFormState extends State<FeedForm> {
                 keyboardType: TextInputType.text,
                 autofocus: false,
                 controller: languageController,
+                decoration: InputDecoration(
+                  labelText: 'Language',
+                ),
                 validator: (value) {
                   if (value.isEmpty)
                     return 'Language';
@@ -67,6 +92,9 @@ class _FeedFormState extends State<FeedForm> {
                 keyboardType: TextInputType.text,
                 autofocus: false,
                 controller: urlController,
+                decoration: InputDecoration(
+                  labelText: 'Url',
+                ),
                 validator: (value) {
                   if (value.isEmpty)
                     return 'Url';
@@ -89,7 +117,7 @@ class _FeedFormState extends State<FeedForm> {
                 ),
                 Expanded(
                   child: FlatButton(
-                    child: Text("CANCELAR"),
+                    child: Text("Cancel"),
                     onPressed: () => Navigator.pop<bool>(context, false),
                   ),
                 ),
@@ -98,7 +126,7 @@ class _FeedFormState extends State<FeedForm> {
                 ),
                 Expanded(
                   child: FlatButton(
-                    child: Text("ACEPTAR"),
+                    child: Text("OK"),
                     onPressed: () async {
                       bool success = await saveChanges();
                       if (success) Navigator.pop<bool>(context, true);
@@ -118,22 +146,27 @@ class _FeedFormState extends State<FeedForm> {
 
   Future<bool> saveChanges() {
     if (_formKey.currentState.validate()) {
-      if (widget.feed == null) return createFeed().then<bool>((_) => true);
-      else return editFeed().then<bool>((_) => true);
+      if (widget.feed == null)
+        return createFeed().then<bool>((_) => true);
+      else
+        return editFeed().then<bool>((_) => true);
     }
     return Future.value(false);
   }
 
   Future<void> createFeed() {
     return Feed(
-            name: nameController.text,
+            userId: widget.user?.uid,
+            nameEn: nameEnController.text,
+            nameEs: nameEsController.text,
             language: languageController.text,
             url: urlController.text)
         .create();
   }
 
   Future<void> editFeed() {
-    widget.feed.name = nameController.text;
+    widget.feed.nameEn = nameEnController.text;
+    widget.feed.nameEs = nameEsController.text;
     widget.feed.language = languageController.text;
     widget.feed.url = urlController.text;
 
@@ -144,7 +177,8 @@ class _FeedFormState extends State<FeedForm> {
   void initState() {
     super.initState();
     if (widget.feed != null) {
-      nameController.text = widget.feed.name;
+      nameEnController.text = widget.feed.nameEn;
+      nameEsController.text = widget.feed.nameEs;
       languageController.text = widget.feed.language;
       urlController.text = widget.feed.url;
     }
@@ -152,7 +186,8 @@ class _FeedFormState extends State<FeedForm> {
 
   @override
   void dispose() {
-    nameController.dispose();
+    nameEnController.dispose();
+    nameEsController.dispose();
     languageController.dispose();
     urlController.dispose();
 

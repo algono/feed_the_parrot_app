@@ -14,17 +14,18 @@ class FeedDB {
   static String getCollectionNameFromUser(String userId) => "$usersCollectionName/$userId/$privateCollectionName";
 
   static const String 
-    nameAttribute = "name",
+    nameEnAttribute = "name-en",
+    nameEsAttribute = "name-es",
     languageAttribute = "language",
     urlAttribute = "url";
 }
 
 class Feed extends DBComponent {
-  String name;
+  String nameEn, nameEs;
   String language; // TODO: Use the Locale type
   String url;
 
-  Feed({String userId, this.name, this.language, this.url}) : super(
+  Feed({String userId, this.nameEn, this.nameEs, this.language, this.url}) : super(
     collection: userId == null ? FeedDB.publicCollectionName : FeedDB.getCollectionNameFromUser(userId));
 
   Feed.fromReference(DocumentReference reference, {bool init = true})
@@ -38,7 +39,8 @@ class Feed extends DBComponent {
       selected: selected,
       onSelectChanged: (selected) => updateSelected(this, selected),
       cells: [
-        DataCell(Text(this.name), showEditIcon: true, onTap: () => openFeedForm(this)),
+        DataCell(Text(this.nameEn ?? ''), showEditIcon: true, onTap: () => openFeedForm(this)),
+        DataCell(Text(this.nameEs ?? '')),
         DataCell(Text(this.language)),
         DataCell(Text(this.url)),
       ],
@@ -47,7 +49,8 @@ class Feed extends DBComponent {
   
   @override
   Future<void> loadFromSnapshot(DocumentSnapshot snapshot) async {
-    this.name = snapshot.get(FeedDB.nameAttribute);
+    this.nameEn = snapshot.get(FeedDB.nameEnAttribute);
+    this.nameEs = snapshot.get(FeedDB.nameEsAttribute);
     this.language = snapshot.get(FeedDB.languageAttribute);
     this.url = snapshot.get(FeedDB.urlAttribute);
   }
@@ -56,7 +59,8 @@ class Feed extends DBComponent {
   Future<Map<String, dynamic>> toMap() async {
     Map<String, dynamic> map = Map<String, dynamic>();
 
-    map[FeedDB.nameAttribute] = this.name;
+    map[FeedDB.nameEnAttribute] = this.nameEn;
+    map[FeedDB.nameEsAttribute] = this.nameEs;
     map[FeedDB.languageAttribute] = this.language;
     map[FeedDB.urlAttribute] = this.url;
 
