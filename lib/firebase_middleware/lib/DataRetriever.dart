@@ -15,9 +15,9 @@ class DataRetriever {
 
   static StreamBuilder<Map<Type, QuerySnapshot>>
       getStreamBuilderFromMultipleCollectionStreamSystem(
-          MultipleCollectionStreamSystem multipleCollectionStreamSystem,
+          {MultipleCollectionStreamSystem multipleCollectionStreamSystem,
           Widget Function(BuildContext, AsyncSnapshot<Map<Type, QuerySnapshot>>)
-              builder) {
+              builder}) {
     return StreamBuilder<Map<Type, QuerySnapshot>>(
       stream: multipleCollectionStreamSystem.stream,
       builder: builder,
@@ -26,16 +26,16 @@ class DataRetriever {
 
   // Collection
   static StreamBuilder<QuerySnapshot> getCollectionStreamBuilder(
-      String collectionPath,
-      Widget Function(BuildContext, AsyncSnapshot<QuerySnapshot>) builder) {
+      {String collectionPath,
+      Widget Function(BuildContext, AsyncSnapshot<QuerySnapshot>) builder}) {
     return getCollectionStreamBuilderFromReference(
-        getCollection(collectionPath), builder);
+        collectionReference: getCollection(collectionPath), builder: builder);
   }
 
   static StreamBuilder<QuerySnapshot>
       getCollectionStreamBuilderFromReference(
-          CollectionReference collectionReference,
-          Widget Function(BuildContext, AsyncSnapshot<QuerySnapshot>) builder) {
+          {CollectionReference collectionReference,
+          Widget Function(BuildContext, AsyncSnapshot<QuerySnapshot>) builder}) {
     return StreamBuilder<QuerySnapshot>(
       stream: collectionReference.snapshots(),
       builder: builder,
@@ -44,17 +44,17 @@ class DataRetriever {
 
   // Document (Doc)
   static StreamBuilder<DocumentSnapshot> getDocStreamBuilder(
-      String documentPath,
-      Widget Function(BuildContext, AsyncSnapshot<DocumentSnapshot>) builder) {
+      {String documentPath,
+      Widget Function(BuildContext, AsyncSnapshot<DocumentSnapshot>) builder}) {
     return getDocStreamBuilderFromReference(
-        getDoc(documentPath), builder);
+        documentReference: getDoc(documentPath), builder: builder);
   }
 
   static StreamBuilder<DocumentSnapshot>
       getDocStreamBuilderFromReference(
-          DocumentReference documentReference,
+          {DocumentReference documentReference,
           Widget Function(BuildContext, AsyncSnapshot<DocumentSnapshot>)
-              builder) {
+              builder}) {
     return StreamBuilder<DocumentSnapshot>(
       stream: documentReference.snapshots(),
       builder: builder,

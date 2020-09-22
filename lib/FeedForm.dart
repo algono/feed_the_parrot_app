@@ -89,7 +89,7 @@ class _FeedFormState extends State<FeedForm> {
                 ),
                 Expanded(
                   child: FlatButton(
-                    child: Text("CANCELAR"), 
+                    child: Text("CANCELAR"),
                     onPressed: () => Navigator.pop<bool>(context, false),
                   ),
                 ),
@@ -98,9 +98,10 @@ class _FeedFormState extends State<FeedForm> {
                 ),
                 Expanded(
                   child: FlatButton(
-                    child: Text("ACEPTAR"), onPressed: () {
-                      saveChanges();
-                      Navigator.pop<bool>(context, true);
+                    child: Text("ACEPTAR"),
+                    onPressed: () async {
+                      bool success = await saveChanges();
+                      if (success) Navigator.pop<bool>(context, true);
                     },
                   ),
                 ),
@@ -115,10 +116,28 @@ class _FeedFormState extends State<FeedForm> {
     );
   }
 
-  void saveChanges() {
+  Future<bool> saveChanges() {
+    if (_formKey.currentState.validate()) {
+      if (widget.feed == null) return createFeed().then<bool>((_) => true);
+      else return editFeed().then<bool>((_) => true);
+    }
+    return Future.value(false);
+  }
+
+  Future<void> createFeed() {
+    return Feed(
+            name: nameController.text,
+            language: languageController.text,
+            url: urlController.text)
+        .create();
+  }
+
+  Future<void> editFeed() {
     widget.feed.name = nameController.text;
     widget.feed.language = languageController.text;
     widget.feed.url = urlController.text;
+
+    return widget.feed.update();
   }
 
   @override

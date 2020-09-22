@@ -21,7 +21,8 @@ abstract class DBComponent {
     }
 
   DBComponent.fromSnapshot(DocumentSnapshot snapshot)
-  : this.collection = snapshot.reference.parent {
+  : this._reference = snapshot.reference,
+    this.collection = snapshot.reference.parent {
     _init = this.loadFromSnapshot(snapshot);
   }
 

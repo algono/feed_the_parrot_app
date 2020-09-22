@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "726519280269",
+    "firebase_url": "https://feedtheparrot-rss.firebaseio.com",
+    "project_id": "feedtheparrot-rss",
+    "storage_bucket": "feedtheparrot-rss.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726519280269:android:8991d793a45048c37968c4",
+        "android_client_info": {
+          "package_name": "com.algono.feed_the_parrot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726519280269-7a6vrne1bmhsh4cgakjo1cmq4drdadp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALUzUeAtIvtHRLr91cI9GlHDEt-vg3bQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726519280269-7a6vrne1bmhsh4cgakjo1cmq4drdadp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

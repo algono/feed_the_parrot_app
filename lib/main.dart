@@ -1,9 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:feed_the_parrot/firebase_middleware/lib/DataRetriever.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'Feed.dart';
 import 'FeedForm.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -53,10 +58,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Feed feed = Feed(
-      name: "Potato",
-      language: "en-US",
-      url: 'https://devblogs.microsoft.com/commandline/feed/');
+  List<Feed> feeds;
+  final Set<Feed> selectedFeeds = Set<Feed>();
 
   @override
   Widget build(BuildContext context) {
@@ -75,30 +78,75 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         // SingleChildScrollView lets the user scroll the table horizontally
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: DataTable(
-              columns: [
-                DataColumn(label: Text('Name')),
-                DataColumn(label: Text('Language')),
-                DataColumn(label: Text('URL')),
-              ],
-              rows: [feed.toDataRow(_openFeedForm)],
-            ),
+          DataRetriever.getCollectionStreamBuilder(
+              collectionPath: FeedDB.publicCollectionName,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData)
+                  return const Center(child: const CircularProgressIndicator());
+
+                List<DocumentSnapshot> collection = snapshot.data.docs;
+
+                feeds =
+                    collection.map((doc) => Feed.fromSnapshot(doc)).toList();
+
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    columns: [
+                      DataColumn(label: Text('Name')),
+                      DataColumn(label: Text('Language')),
+                      DataColumn(label: Text('URL')),
+                    ],
+                    rows: feeds
+                        .map((feed) => feed.toDataRow(
+                            selected: selectedFeeds.contains(feed),
+                            openFeedForm: _openFeedForm,
+                            updateSelected: _updateSelected))
+                        .toList(),
+                  ),
+                );
+              }),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlatButton(
+                child: Text('New'),
+                onPressed: _openFeedForm,
+              ),
+              FlatButton(
+                child: Text('Delete'),
+                onPressed: selectedFeeds.isEmpty ? null : _deleteSelectedFeeds,
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  _openFeedForm(Feed feed) async {
+  void _openFeedForm([Feed feed]) async {
     return Navigator.of(context)
-        .push<bool>(MaterialPageRoute<bool>(builder: (BuildContext context) {
-      return FeedForm(feed: feed);
-    })).then((modified) {
-      if (modified) {
+        .push<dynamic>(MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => FeedForm(feed: feed)))
+        .then((modified) {
+      if (modified == true) {
         setState(() {});
       }
     });
+  }
+
+  void _updateSelected(Feed feed, bool selected) {
+    setState(() {
+      if (selected) {
+        selectedFeeds.add(feed);
+      } else {
+        selectedFeeds.remove(feed);
+      }
+    });
+  }
+
+  void _deleteSelectedFeeds() async {
+    await Future.forEach<Feed>(selectedFeeds, (feed) => feed.delete());
+    selectedFeeds.clear();
   }
 }
