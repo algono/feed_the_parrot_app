@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feed_the_parrot/firebase_middleware/lib/DataRetriever.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'Feed.dart';
 import 'FeedForm.dart';
+import 'LoginForm.dart';
 
 class MyHomePage extends StatefulWidget {
   final User user;
@@ -43,12 +46,32 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        actions: [
+          Transform.rotate(
+            angle: math.pi,
+            child: IconButton(
+              icon: Icon(
+                Icons.exit_to_app,
+              ),
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+
+                // Open the login form
+                await Navigator.of(context).pushReplacement<Null, Null>(
+                    MaterialPageRoute<Null>(
+                        builder: (BuildContext context) => LoginForm()));
+              },
+            ),
+          ),
+        ],
       ),
       body: Column(
         // SingleChildScrollView lets the user scroll the table horizontally
         children: [
           DataRetriever.getCollectionStreamBuilder(
-              collectionPath: widget.user == null ? FeedDB.publicCollectionName : FeedDB.getCollectionNameFromUser(widget.user.uid),
+              collectionPath: widget.user == null
+                  ? FeedDB.publicCollectionName
+                  : FeedDB.getCollectionNameFromUser(widget.user.uid),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
                   return const Center(child: const CircularProgressIndicator());
@@ -97,7 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void _openFeedForm([Feed feed]) async {
     return Navigator.of(context)
         .push<dynamic>(MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => FeedForm(user: widget.user, feed: feed)))
+            builder: (BuildContext context) =>
+                FeedForm(user: widget.user, feed: feed)))
         .then((modified) {
       if (modified == true) {
         setState(() {});
