@@ -108,7 +108,38 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               FlatButton(
                 child: Text('Delete'),
-                onPressed: selectedFeeds.isEmpty ? null : _deleteSelectedFeeds,
+                onPressed: selectedFeeds.isEmpty
+                    ? null
+                    : () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text('Are you sure?'),
+                            content: Text(
+                                'Are you sure you want to delete the following elements:\n\n' +
+                                    selectedFeeds.fold(
+                                        '',
+                                        (previousValue, element) =>
+                                            previousValue +
+                                            '- ' +
+                                            element.nameEn +
+                                            '\n')),
+                            actions: [
+                              FlatButton(
+                                child: Text('No'),
+                                onPressed: () => Navigator.of(context).pop(),
+                              ),
+                              FlatButton(
+                                child: Text('Yes'),
+                                onPressed: () {
+                                  _deleteSelectedFeeds();
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
               ),
             ],
           ),
