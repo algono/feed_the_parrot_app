@@ -45,7 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: SizedBox(
+          height: kToolbarHeight / 1.5,
+          child: Row(
+            children: [
+              Image.asset('assets/icons/icon_app.png', fit: BoxFit.contain),
+              SizedBox(
+                width: 10,
+              ),
+              Text(widget.title),
+            ],
+          ),
+        ),
         actions: [
           Transform.rotate(
             angle: math.pi,
@@ -68,37 +79,40 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         // SingleChildScrollView lets the user scroll the table horizontally
         children: [
-          DataRetriever.getCollectionStreamBuilder(
-              collectionPath: widget.user == null
-                  ? FeedDB.publicCollectionName
-                  : FeedDB.getCollectionNameFromUser(widget.user.uid),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData)
-                  return const Center(child: const CircularProgressIndicator());
+          Expanded(
+            child: DataRetriever.getCollectionStreamBuilder(
+                collectionPath: widget.user == null
+                    ? FeedDB.publicCollectionName
+                    : FeedDB.getCollectionNameFromUser(widget.user.uid),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData)
+                    return const Center(
+                        child: const CircularProgressIndicator());
 
-                List<DocumentSnapshot> collection = snapshot.data.docs;
+                  List<DocumentSnapshot> collection = snapshot.data.docs;
 
-                feeds =
-                    collection.map((doc) => Feed.fromSnapshot(doc)).toList();
+                  feeds =
+                      collection.map((doc) => Feed.fromSnapshot(doc)).toList();
 
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: [
-                      DataColumn(label: Text('Name (en)')),
-                      DataColumn(label: Text('Name (es)')),
-                      DataColumn(label: Text('Language')),
-                      DataColumn(label: Text('URL')),
-                    ],
-                    rows: feeds
-                        .map((feed) => feed.toDataRow(
-                            selected: selectedFeeds.contains(feed),
-                            openFeedForm: _openFeedForm,
-                            updateSelected: _updateSelected))
-                        .toList(),
-                  ),
-                );
-              }),
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columns: [
+                        DataColumn(label: Text('Name (en)')),
+                        DataColumn(label: Text('Name (es)')),
+                        DataColumn(label: Text('Language')),
+                        DataColumn(label: Text('URL')),
+                      ],
+                      rows: feeds
+                          .map((feed) => feed.toDataRow(
+                              selected: selectedFeeds.contains(feed),
+                              openFeedForm: _openFeedForm,
+                              updateSelected: _updateSelected))
+                          .toList(),
+                    ),
+                  );
+                }),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
