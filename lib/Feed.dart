@@ -54,7 +54,7 @@ class Feed extends DBComponent {
       this.nameEn,
       this.nameEs,
       this.language,
-      this.url,
+      @required this.url,
       this.readFields,
       this.itemLimit,
       this.truncateSummaryAt})

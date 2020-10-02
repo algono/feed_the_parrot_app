@@ -182,8 +182,8 @@ class _FeedFormState extends State<FeedForm> {
   Future<void> createFeed() {
     return Feed(
             userId: widget.user?.uid,
-            nameEn: nameEnController.text,
-            nameEs: nameEsController.text,
+            nameEn: nameEnController.text.toLowerCase(),
+            nameEs: nameEsController.text.toLowerCase(),
             language: languageController.text,
             url: urlController.text,
             itemLimit: itemLimitController.text.isEmpty
@@ -196,8 +196,8 @@ class _FeedFormState extends State<FeedForm> {
   }
 
   Future<void> editFeed() {
-    widget.feed.nameEn = nameEnController.text;
-    widget.feed.nameEs = nameEsController.text;
+    widget.feed.nameEn = nameEnController.text.toLowerCase();
+    widget.feed.nameEs = nameEsController.text.toLowerCase();
     widget.feed.language = languageController.text;
     widget.feed.url = urlController.text;
 
