@@ -48,7 +48,7 @@ class _FeedFormState extends State<FeedForm> {
                 autofocus: false,
                 controller: nameEnController,
                 decoration: InputDecoration(
-                  labelText: 'Name (en)',
+                  labelText: '🇺🇸 - Name',
                 ),
               ),
               SizedBox(height: 20.0),
@@ -58,7 +58,7 @@ class _FeedFormState extends State<FeedForm> {
                 autofocus: false,
                 controller: nameEsController,
                 decoration: InputDecoration(
-                  labelText: 'Name (es)',
+                  labelText: '🇪🇸 - Name',
                 ),
               ),
               SizedBox(height: 20.0),
@@ -87,40 +87,45 @@ class _FeedFormState extends State<FeedForm> {
                     return null;
                 },
               ),
-              // TODO: Add form for read fields
               SizedBox(height: 20.0),
-              TextFormField(
-                maxLines: 1,
-                keyboardType: TextInputType.number,
-                autofocus: false,
-                controller: itemLimitController,
-                decoration: InputDecoration(
-                    labelText: 'Item limit',
-                    hintText:
-                        'The maximum number of items this feed should return.'),
-                validator: (value) {
-                  if (value.isNotEmpty && int.tryParse(value) == null)
-                    return 'This should be a number';
-                  else
-                    return null;
-                },
-              ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                maxLines: 1,
-                keyboardType: TextInputType.number,
-                autofocus: false,
-                controller: truncateSummaryAtController,
-                decoration: InputDecoration(
-                    labelText: 'Truncate summary at',
-                    hintText:
-                        'The maximum number of characters the summary should have.'),
-                validator: (value) {
-                  if (value.isNotEmpty && int.tryParse(value) == null)
-                    return 'This should be a number';
-                  else
-                    return null;
-                },
+              ExpansionTile(
+                title: Text('Options'),
+                children: [
+                  // TODO: Add form for read fields
+                  TextFormField(
+                    maxLines: 1,
+                    keyboardType: TextInputType.number,
+                    autofocus: false,
+                    controller: itemLimitController,
+                    decoration: InputDecoration(
+                        labelText: 'Item limit',
+                        hintText:
+                            'Max number of items this feed should return'),
+                    validator: (value) {
+                      if (value.isNotEmpty && int.tryParse(value) == null)
+                        return 'This should be a number';
+                      else
+                        return null;
+                    },
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    maxLines: 1,
+                    keyboardType: TextInputType.number,
+                    autofocus: false,
+                    controller: truncateSummaryAtController,
+                    decoration: InputDecoration(
+                        labelText: 'Truncate summary at',
+                        hintText:
+                            'Max number of characters the summary should have'),
+                    validator: (value) {
+                      if (value.isNotEmpty && int.tryParse(value) == null)
+                        return 'This should be a number';
+                      else
+                        return null;
+                    },
+                  ),
+                ],
               ),
               SizedBox(height: 10.0),
             ],
