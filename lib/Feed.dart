@@ -16,28 +16,8 @@ class FeedDB {
       languageAttribute = "language",
       urlAttribute = "url";
 
-  static const String readFieldsAttribute = "readFields",
-      itemLimitAttribute = "itemLimit",
-      truncateSummaryAtAttribute = "truncateSummaryAt";
-
-  static const String itemFieldNameAttribute = "name",
-      itemFieldTruncateAtAttribute = "truncateAt";
-}
-
-class ItemField {
-  String name;
-  int truncateAt;
-
-  ItemField({this.name, this.truncateAt});
-
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = Map<String, dynamic>();
-
-    map[FeedDB.itemFieldNameAttribute] = this.name;
-    map[FeedDB.itemFieldTruncateAtAttribute] = this.truncateAt;
-
-    return map;
-  }
+  static const String itemLimitAttribute = "itemLimit",
+      truncateContentAtAttribute = "truncateContentAt";
 }
 
 class Feed extends DBComponent {
@@ -45,9 +25,8 @@ class Feed extends DBComponent {
   String language; // TODO: Use the Locale type
   String url;
 
-  List<ItemField> readFields;
   int itemLimit;
-  int truncateSummaryAt;
+  int truncateContentAt;
 
   Feed(
       {String userId,
@@ -55,9 +34,8 @@ class Feed extends DBComponent {
       this.nameEs,
       this.language,
       @required this.url,
-      this.readFields,
       this.itemLimit,
-      this.truncateSummaryAt})
+      this.truncateContentAt})
       : super(
             collection: userId == null
                 ? FeedDB.publicCollectionName
@@ -94,18 +72,8 @@ class Feed extends DBComponent {
     this.language = data[FeedDB.languageAttribute];
     this.url = data[FeedDB.urlAttribute];
 
-    var readFieldsFromDB = data[FeedDB.readFieldsAttribute];
-
-    this.readFields = readFieldsFromDB == null
-        ? null
-        : List<Map<String, dynamic>>.from(readFieldsFromDB)
-            .map((itemFieldMap) => ItemField(
-                name: itemFieldMap[FeedDB.itemFieldNameAttribute],
-                truncateAt: itemFieldMap[FeedDB.itemFieldTruncateAtAttribute]))
-            .toList();
-
     this.itemLimit = data[FeedDB.itemLimitAttribute];
-    this.truncateSummaryAt = data[FeedDB.truncateSummaryAtAttribute];
+    this.truncateContentAt = data[FeedDB.truncateContentAtAttribute];
   }
 
   @override
@@ -117,10 +85,8 @@ class Feed extends DBComponent {
     map[FeedDB.languageAttribute] = this.language;
     map[FeedDB.urlAttribute] = this.url;
 
-    map[FeedDB.readFieldsAttribute] =
-        this.readFields?.map((itemField) => itemField.toMap())?.toList();
     map[FeedDB.itemLimitAttribute] = this.itemLimit;
-    map[FeedDB.truncateSummaryAtAttribute] = this.truncateSummaryAt;
+    map[FeedDB.truncateContentAtAttribute] = this.truncateContentAt;
 
     return map;
   }

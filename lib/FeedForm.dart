@@ -21,7 +21,7 @@ class _FeedFormState extends State<FeedForm> {
   final urlController = TextEditingController();
 
   final itemLimitController = TextEditingController();
-  final truncateSummaryAtController = TextEditingController();
+  final truncateContentAtController = TextEditingController();
 
   String name;
   String language;
@@ -91,7 +91,6 @@ class _FeedFormState extends State<FeedForm> {
               ExpansionTile(
                 title: Text('Options'),
                 children: [
-                  // TODO: Add form for read fields
                   TextFormField(
                     maxLines: 1,
                     keyboardType: TextInputType.number,
@@ -113,11 +112,11 @@ class _FeedFormState extends State<FeedForm> {
                     maxLines: 1,
                     keyboardType: TextInputType.number,
                     autofocus: false,
-                    controller: truncateSummaryAtController,
+                    controller: truncateContentAtController,
                     decoration: InputDecoration(
-                        labelText: 'Truncate summary at',
+                        labelText: 'Truncate content at',
                         hintText:
-                            'Max number of characters the summary should have'),
+                            'Max number of characters the content should have'),
                     validator: (value) {
                       if (value.isNotEmpty && int.tryParse(value) == null)
                         return 'This should be a number';
@@ -189,9 +188,9 @@ class _FeedFormState extends State<FeedForm> {
             itemLimit: itemLimitController.text.isEmpty
                 ? null
                 : int.parse(itemLimitController.text),
-            truncateSummaryAt: truncateSummaryAtController.text.isEmpty
+            truncateContentAt: truncateContentAtController.text.isEmpty
                 ? null
-                : int.parse(truncateSummaryAtController.text))
+                : int.parse(truncateContentAtController.text))
         .create();
   }
 
@@ -204,9 +203,9 @@ class _FeedFormState extends State<FeedForm> {
     widget.feed.itemLimit = itemLimitController.text.isEmpty
         ? null
         : int.parse(itemLimitController.text);
-    widget.feed.truncateSummaryAt = truncateSummaryAtController.text.isEmpty
+    widget.feed.truncateContentAt = truncateContentAtController.text.isEmpty
         ? null
-        : int.parse(truncateSummaryAtController.text);
+        : int.parse(truncateContentAtController.text);
 
     return widget.feed.update();
   }
@@ -221,8 +220,8 @@ class _FeedFormState extends State<FeedForm> {
       urlController.text = widget.feed.url;
 
       itemLimitController.text = widget.feed.itemLimit?.toString() ?? '';
-      truncateSummaryAtController.text =
-          widget.feed.truncateSummaryAt?.toString() ?? '';
+      truncateContentAtController.text =
+          widget.feed.truncateContentAt?.toString() ?? '';
     }
   }
 
