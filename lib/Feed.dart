@@ -22,7 +22,7 @@ class FeedDB {
 
 class Feed extends DBComponent {
   String nameEn, nameEs;
-  String language; // TODO: Use the Locale type
+  String language;
   String url;
 
   int itemLimit;
