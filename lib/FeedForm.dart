@@ -17,15 +17,12 @@ class FeedForm extends StatefulWidget {
 class _FeedFormState extends State<FeedForm> {
   final nameEnController = TextEditingController();
   final nameEsController = TextEditingController();
-  final languageController = TextEditingController();
   final urlController = TextEditingController();
 
   final itemLimitController = TextEditingController();
   final truncateContentAtController = TextEditingController();
 
-  String name;
-  String language;
-  String url;
+  String languageValue;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -62,14 +59,27 @@ class _FeedFormState extends State<FeedForm> {
                 ),
               ),
               SizedBox(height: 20.0),
-              TextFormField(
-                maxLines: 1,
-                keyboardType: TextInputType.text,
+              DropdownButtonFormField<String>(
                 autofocus: false,
-                controller: languageController,
                 decoration: InputDecoration(
                   labelText: 'Language',
                 ),
+                items: [
+                  DropdownMenuItem(value: 'en', child: Text('🇺🇸 English')),
+                  DropdownMenuItem(value: 'es', child: Text('🇪🇸 Spanish')),
+                ],
+                value: languageValue,
+                onChanged: (value) {
+                  setState(() {
+                    languageValue = value;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty)
+                    return 'Required';
+                  else
+                    return null;
+                },
               ),
               SizedBox(height: 20.0),
               TextFormField(
@@ -183,7 +193,7 @@ class _FeedFormState extends State<FeedForm> {
             userId: widget.user?.uid,
             nameEn: nameEnController.text.toLowerCase(),
             nameEs: nameEsController.text.toLowerCase(),
-            language: languageController.text,
+            language: languageValue,
             url: urlController.text,
             itemLimit: itemLimitController.text.isEmpty
                 ? null
@@ -197,7 +207,7 @@ class _FeedFormState extends State<FeedForm> {
   Future<void> editFeed() {
     widget.feed.nameEn = nameEnController.text.toLowerCase();
     widget.feed.nameEs = nameEsController.text.toLowerCase();
-    widget.feed.language = languageController.text;
+    widget.feed.language = languageValue;
     widget.feed.url = urlController.text;
 
     widget.feed.itemLimit = itemLimitController.text.isEmpty
@@ -216,7 +226,7 @@ class _FeedFormState extends State<FeedForm> {
     if (widget.feed != null) {
       nameEnController.text = widget.feed.nameEn ?? '';
       nameEsController.text = widget.feed.nameEs ?? '';
-      languageController.text = widget.feed.language ?? '';
+      languageValue = widget.feed.language ?? '';
       urlController.text = widget.feed.url;
 
       itemLimitController.text = widget.feed.itemLimit?.toString() ?? '';
@@ -229,7 +239,6 @@ class _FeedFormState extends State<FeedForm> {
   void dispose() {
     nameEnController.dispose();
     nameEsController.dispose();
-    languageController.dispose();
     urlController.dispose();
 
     super.dispose();
