@@ -217,6 +217,33 @@ class AppLocalizations {
       locale: localeName,
     );
   }
+
+  String get invalidCodeErrorMessage {
+    return Intl.message(
+      'The code is not valid',
+      name: 'invalidCodeErrorMessage',
+      desc: 'Error message when the login code is not valid',
+      locale: localeName,
+    );
+  }
+
+  String get expiredCodeErrorMessage {
+    return Intl.message(
+      'The code has expired',
+      name: 'expiredCodeErrorMessage',
+      desc: 'Error message when the login code has expired',
+      locale: localeName,
+    );
+  }
+
+  String get unknownErrorMessage {
+    return Intl.message(
+      'An error has occured',
+      name: 'unknownErrorMessage',
+      desc: 'Error message when an unknown error has occured',
+      locale: localeName,
+    );
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

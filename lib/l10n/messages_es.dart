@@ -25,8 +25,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteDialogConfirmationContent" : MessageLookupByLibrary.simpleMessage("¿Estás seguro de que quieres borrar los siguientes elementos?"),
     "deleteDialogConfirmationTitle" : MessageLookupByLibrary.simpleMessage("¿Estás seguro?"),
     "englishLanguage" : MessageLookupByLibrary.simpleMessage("Inglés"),
+    "expiredCodeErrorMessage" : MessageLookupByLibrary.simpleMessage("El código ha expirado"),
     "feedFormEditTitle" : MessageLookupByLibrary.simpleMessage("Editar feed"),
     "feedFormNewTitle" : MessageLookupByLibrary.simpleMessage("Nueva feed"),
+    "invalidCodeErrorMessage" : MessageLookupByLibrary.simpleMessage("El código no es válido"),
     "itemLimitField" : MessageLookupByLibrary.simpleMessage("Límite de elementos"),
     "itemLimitHint" : MessageLookupByLibrary.simpleMessage("Máximo número de elementos que debería devolver esta feed"),
     "languageField" : MessageLookupByLibrary.simpleMessage("Idioma"),
@@ -41,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "spanishLanguage" : MessageLookupByLibrary.simpleMessage("Español"),
     "truncateContentAtField" : MessageLookupByLibrary.simpleMessage("Truncar contenido en"),
     "truncateContentAtHint" : MessageLookupByLibrary.simpleMessage("Máximo número de caracteres que debería tener el contenido"),
+    "unknownErrorMessage" : MessageLookupByLibrary.simpleMessage("Ha habido un error"),
     "valueShouldBeANumberErrorMessage" : MessageLookupByLibrary.simpleMessage("Esto debería ser un número")
   };
 }

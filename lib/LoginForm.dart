@@ -33,7 +33,8 @@ class _LoginFormState extends State<LoginForm> {
                 maxLength: 16,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return AppLocalizations.of(context).loginInputEmptyErrorMessage;
+                    return AppLocalizations.of(context)
+                        .loginInputEmptyErrorMessage;
                   } else {
                     return null;
                   }
@@ -44,20 +45,23 @@ class _LoginFormState extends State<LoginForm> {
                   labelText: AppLocalizations.of(context).loginInputLabel,
                 ),
               ),
-              RaisedButton(
-                child: Text(AppLocalizations.of(context).loginButtonTooltip),
-                onPressed: _isLoggingIn
-                    ? null
-                    : () async {
-                        setState(() => _isLoggingIn = true);
+              Builder(
+                  builder: (context) => RaisedButton(
+                        child: Text(
+                            AppLocalizations.of(context).loginButtonTooltip),
+                        onPressed: _isLoggingIn
+                            ? null
+                            : () async {
+                                setState(() => _isLoggingIn = true);
 
-                        if (_formKey.currentState.validate()) {
-                          await _signInWithCode(context, _codeController.text);
-                        }
+                                if (_formKey.currentState.validate()) {
+                                  await _signInWithCode(
+                                      context, _codeController.text);
+                                }
 
-                        setState(() => _isLoggingIn = false);
-                      },
-              ),
+                                setState(() => _isLoggingIn = false);
+                              },
+                      )),
               _isLoggingIn
                   ? const CircularProgressIndicator()
                   : const SizedBox(),
@@ -69,19 +73,40 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future _signInWithCode(BuildContext context, String code) async {
-    var signInWithAuthCode = FirebaseFunctions.instance
-        .httpsCallable('signInWithAuthCode');
+    var signInWithAuthCode =
+        FirebaseFunctions.instance.httpsCallable('signInWithAuthCode');
 
-    var token = await signInWithAuthCode.call(<String, dynamic>{
-      'code': code,
-    });
+    try {
+      var token = await signInWithAuthCode.call(<String, dynamic>{
+        'code': code,
+      });
 
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCustomToken(token.data);
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCustomToken(token.data);
 
-    Navigator.of(context).pushReplacement<Null, Null>(MaterialPageRoute<Null>(
-        builder: (BuildContext context) => MyHomePage(
-              user: userCredential.user,
-            )));
+      Navigator.of(context).pushReplacement<Null, Null>(MaterialPageRoute<Null>(
+          builder: (BuildContext context) => MyHomePage(
+                user: userCredential.user,
+              )));
+    } on FirebaseFunctionsException catch (ex) {
+      var localizations = AppLocalizations.of(context);
+      String message;
+      switch (ex.code) {
+        case 'unauthenticated':
+          message = localizations.invalidCodeErrorMessage;
+          break;
+        case 'out-of-range':
+          message = localizations.expiredCodeErrorMessage;
+          break;
+        default:
+          message = localizations.unknownErrorMessage;
+          break;
+      }
+
+      // SnackBar is the material design official "Toast"
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+      ));
+    }
   }
 }

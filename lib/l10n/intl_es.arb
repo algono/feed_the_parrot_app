@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-19T17:05:11.573508",
+  "@@last_modified": "2020-11-19T23:36:57.947804",
   "appTitle": "Al Loro",
   "@appTitle": {
     "description": "Título de la aplicación",
@@ -123,6 +123,24 @@
   "valueShouldBeANumberErrorMessage": "Esto debería ser un número",
   "@valueShouldBeANumberErrorMessage": {
     "description": "Mensaje de error cuando un valor no es un número (y debería serlo)",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidCodeErrorMessage": "El código no es válido",
+  "@invalidCodeErrorMessage": {
+    "description": "Mensaje de error cuando el código de inicio de sesión no es válido",
+    "type": "text",
+    "placeholders": {}
+  },
+  "expiredCodeErrorMessage": "El código ha expirado",
+  "@expiredCodeErrorMessage": {
+    "description": "Mensaje de error cuando el código de inicio de sesión ha expirado",
+    "type": "text",
+    "placeholders": {}
+  },
+  "unknownErrorMessage": "Ha habido un error",
+  "@unknownErrorMessage": {
+    "description": "Mensaje de error cuando ha habido un error desconocido",
     "type": "text",
     "placeholders": {}
   }
