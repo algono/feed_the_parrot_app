@@ -69,8 +69,8 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Future _signInWithCode(BuildContext context, String code) async {
-    var signInWithAuthCode = CloudFunctions.instance
-        .getHttpsCallable(functionName: 'signInWithAuthCode');
+    var signInWithAuthCode = FirebaseFunctions.instance
+        .httpsCallable('signInWithAuthCode');
 
     var token = await signInWithAuthCode.call(<String, dynamic>{
       'code': code,
