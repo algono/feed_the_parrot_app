@@ -2,12 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'Feed.dart';
+import 'main.dart';
 
 class FeedForm extends StatefulWidget {
   final User user;
   final Feed feed;
 
-  String get title => (feed == null) ? "New feed" : "Edit feed";
+  String title(BuildContext context) => (feed == null)
+      ? AppLocalizations.of(context).feedFormNewTitle
+      : AppLocalizations.of(context).feedFormEditTitle;
 
   FeedForm({this.user, this.feed});
   @override
@@ -28,11 +31,13 @@ class _FeedFormState extends State<FeedForm> {
 
   @override
   Widget build(BuildContext context) {
+    final nameField = AppLocalizations.of(context).nameField;
+
     return Form(
       key: _formKey,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(widget.title(context)),
         ),
         body: Center(
           child: ListView(
@@ -45,7 +50,7 @@ class _FeedFormState extends State<FeedForm> {
                 autofocus: false,
                 controller: nameEnController,
                 decoration: InputDecoration(
-                  labelText: '🇺🇸 - Name',
+                  labelText: '🇺🇸 $nameField',
                 ),
               ),
               SizedBox(height: 20.0),
@@ -55,18 +60,24 @@ class _FeedFormState extends State<FeedForm> {
                 autofocus: false,
                 controller: nameEsController,
                 decoration: InputDecoration(
-                  labelText: '🇪🇸 - Name',
+                  labelText: '🇪🇸 $nameField',
                 ),
               ),
               SizedBox(height: 20.0),
               DropdownButtonFormField<String>(
                 autofocus: false,
                 decoration: InputDecoration(
-                  labelText: 'Language',
+                  labelText: AppLocalizations.of(context).languageField,
                 ),
                 items: [
-                  DropdownMenuItem(value: 'en', child: Text('🇺🇸 English')),
-                  DropdownMenuItem(value: 'es', child: Text('🇪🇸 Spanish')),
+                  DropdownMenuItem(
+                      value: 'en',
+                      child: Text(
+                          '🇺🇸 ${AppLocalizations.of(context).englishLanguage}')),
+                  DropdownMenuItem(
+                      value: 'es',
+                      child: Text(
+                          '🇪🇸 ${AppLocalizations.of(context).spanishLanguage}')),
                 ],
                 value: languageValue,
                 onChanged: (value) {
@@ -76,7 +87,8 @@ class _FeedFormState extends State<FeedForm> {
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty)
-                    return 'Required';
+                    return AppLocalizations.of(context)
+                        .requiredValueErrorMessage;
                   else
                     return null;
                 },
@@ -92,14 +104,16 @@ class _FeedFormState extends State<FeedForm> {
                 ),
                 validator: (value) {
                   if (value.isEmpty)
-                    return 'Required';
+                    return AppLocalizations.of(context)
+                        .requiredValueErrorMessage;
                   else
                     return null;
                 },
               ),
               SizedBox(height: 20.0),
               ExpansionTile(
-                title: Text('Options'),
+                title: Text(AppLocalizations.of(context)
+                        .optionsTileTitle),
                 children: [
                   TextFormField(
                     maxLines: 1,
@@ -107,12 +121,12 @@ class _FeedFormState extends State<FeedForm> {
                     autofocus: false,
                     controller: itemLimitController,
                     decoration: InputDecoration(
-                        labelText: 'Item limit',
-                        hintText:
-                            'Max number of items this feed should return'),
+                        labelText: AppLocalizations.of(context).itemLimitField,
+                        hintText: AppLocalizations.of(context).itemLimitHint),
                     validator: (value) {
                       if (value.isNotEmpty && int.tryParse(value) == null)
-                        return 'This should be a number';
+                        return AppLocalizations.of(context)
+                            .valueShouldBeANumberErrorMessage;
                       else
                         return null;
                     },
@@ -124,12 +138,14 @@ class _FeedFormState extends State<FeedForm> {
                     autofocus: false,
                     controller: truncateContentAtController,
                     decoration: InputDecoration(
-                        labelText: 'Truncate content at',
+                        labelText:
+                            AppLocalizations.of(context).truncateContentAtField,
                         hintText:
-                            'Max number of characters the content should have'),
+                            AppLocalizations.of(context).truncateContentAtHint),
                     validator: (value) {
                       if (value.isNotEmpty && int.tryParse(value) == null)
-                        return 'This should be a number';
+                        return AppLocalizations.of(context)
+                            .valueShouldBeANumberErrorMessage;
                       else
                         return null;
                     },
@@ -151,7 +167,8 @@ class _FeedFormState extends State<FeedForm> {
                 ),
                 Expanded(
                   child: FlatButton(
-                    child: Text("Cancel"),
+                    child: Text(
+                        MaterialLocalizations.of(context).cancelButtonLabel),
                     onPressed: () => Navigator.pop<bool>(context, false),
                   ),
                 ),
@@ -160,7 +177,8 @@ class _FeedFormState extends State<FeedForm> {
                 ),
                 Expanded(
                   child: FlatButton(
-                    child: Text("OK"),
+                    child:
+                        Text(MaterialLocalizations.of(context).okButtonLabel),
                     onPressed: () async {
                       bool success = await saveChanges();
                       if (success) Navigator.pop<bool>(context, true);

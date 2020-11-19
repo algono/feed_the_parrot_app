@@ -1,0 +1,129 @@
+{
+  "@@last_modified": "2020-11-19T17:05:11.573508",
+  "appTitle": "Al Loro",
+  "@appTitle": {
+    "description": "Título de la aplicación",
+    "type": "text",
+    "placeholders": {}
+  },
+  "feedFormNewTitle": "Nueva feed",
+  "@feedFormNewTitle": {
+    "description": "Título del formulario de feeds cuando se está creando una nueva feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "feedFormEditTitle": "Editar feed",
+  "@feedFormEditTitle": {
+    "description": "Título del formulario de feeds cuando se está editando una feed existente",
+    "type": "text",
+    "placeholders": {}
+  },
+  "optionsTileTitle": "Opciones",
+  "@optionsTileTitle": {
+    "description": "Título del campo expansible de opciones en el formulario de feeds",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameField": "Nombre",
+  "@nameField": {
+    "description": "Nombre del campo de nombre de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "languageField": "Idioma",
+  "@languageField": {
+    "description": "Nombre del campo de idioma de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "englishLanguage": "Inglés",
+  "@englishLanguage": {
+    "description": "Nombre del idioma inglés",
+    "type": "text",
+    "placeholders": {}
+  },
+  "spanishLanguage": "Español",
+  "@spanishLanguage": {
+    "description": "Nombre del idioma español",
+    "type": "text",
+    "placeholders": {}
+  },
+  "itemLimitField": "Límite de elementos",
+  "@itemLimitField": {
+    "description": "Nombre del campo de límite de elementos de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "itemLimitHint": "Máximo número de elementos que debería devolver esta feed",
+  "@itemLimitHint": {
+    "description": "Pista (explicación) sobre qué representa el campo de límite de elementos de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "truncateContentAtField": "Truncar contenido en",
+  "@truncateContentAtField": {
+    "description": "Nombre del campo \"truncar contenido en\" de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "truncateContentAtHint": "Máximo número de caracteres que debería tener el contenido",
+  "@truncateContentAtHint": {
+    "description": "Pista (explicación) sobre qué representa el campo \"truncar contenido en\" de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteDialogConfirmationTitle": "¿Estás seguro?",
+  "@deleteDialogConfirmationTitle": {
+    "description": "Título del diálogo de confirmación cuando se borra una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteDialogConfirmationContent": "¿Estás seguro de que quieres borrar los siguientes elementos?",
+  "@deleteDialogConfirmationContent": {
+    "description": "Contenido del diálogo de confirmación cuando se borra una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newButtonTooltip": "Nueva",
+  "@newButtonTooltip": {
+    "description": "Etiqueta para el botón de añadir una nueva feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginButtonTooltip": "Iniciar sesión",
+  "@loginButtonTooltip": {
+    "description": "Etiqueta para el botón de iniciar sesión",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginInputHint": "Introduce el código que obtuviste de la skill de Alexa",
+  "@loginInputHint": {
+    "description": "Pista para el campo de introducción del código de inicio de sesión",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginInputLabel": "Código",
+  "@loginInputLabel": {
+    "description": "Etiqueta para el campo de introducción del código de inicio de sesión",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginInputEmptyErrorMessage": "El código no puede estar vacío",
+  "@loginInputEmptyErrorMessage": {
+    "description": "Mensaje de error para el campo de introducción del código de inicio de sesión cuando éste está vacío",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requiredValueErrorMessage": "Requerido",
+  "@requiredValueErrorMessage": {
+    "description": "Mensaje de error cuando un valor es requerido",
+    "type": "text",
+    "placeholders": {}
+  },
+  "valueShouldBeANumberErrorMessage": "Esto debería ser un número",
+  "@valueShouldBeANumberErrorMessage": {
+    "description": "Mensaje de error cuando un valor no es un número (y debería serlo)",
+    "type": "text",
+    "placeholders": {}
+  }
+}

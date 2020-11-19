@@ -8,23 +8,13 @@ import 'package:flutter/material.dart';
 import 'Feed.dart';
 import 'FeedForm.dart';
 import 'LoginForm.dart';
+import 'main.dart';
 
 class MyHomePage extends StatefulWidget {
   final User user;
 
-  MyHomePage({Key key, this.title, this.user}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+  MyHomePage({Key key, this.user}) : super(key: key);
+  
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -53,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 width: 10,
               ),
-              Text(widget.title),
+              Text(AppLocalizations.of(context).appTitle),
             ],
           ),
         ),
@@ -94,13 +84,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   feeds =
                       collection.map((doc) => Feed.fromSnapshot(doc)).toList();
 
+                  final nameField = AppLocalizations.of(context).nameField;
+
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
                       columns: [
-                        DataColumn(label: Text('Name (en)')),
-                        DataColumn(label: Text('Name (es)')),
-                        DataColumn(label: Text('Language')),
+                        DataColumn(label: Text('🇺🇸 $nameField')),
+                        DataColumn(label: Text('🇪🇸 $nameField')),
+                        DataColumn(label: Text(AppLocalizations.of(context).languageField)),
                         DataColumn(label: Text('URL')),
                       ],
                       rows: feeds
@@ -117,20 +109,21 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FlatButton(
-                child: Text('New'),
+                child: Text(AppLocalizations.of(context).newButtonTooltip),
                 onPressed: _openFeedForm,
               ),
               FlatButton(
-                child: Text('Delete'),
+                child:
+                    Text(MaterialLocalizations.of(context).deleteButtonTooltip),
                 onPressed: selectedFeeds.isEmpty
                     ? null
                     : () {
                         showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                            title: Text('Are you sure?'),
+                            title: Text(AppLocalizations.of(context).deleteDialogConfirmationTitle),
                             content: Text(
-                                'Are you sure you want to delete the following elements:\n\n' +
+                                '${AppLocalizations.of(context).deleteDialogConfirmationContent}\n\n' +
                                     selectedFeeds.fold(
                                         '',
                                         (previousValue, element) =>
@@ -140,11 +133,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                             '\n')),
                             actions: [
                               FlatButton(
-                                child: Text('No'),
+                                child: Text(MaterialLocalizations.of(context)
+                                    .cancelButtonLabel),
                                 onPressed: () => Navigator.of(context).pop(),
                               ),
                               FlatButton(
-                                child: Text('Yes'),
+                                child: Text(MaterialLocalizations.of(context)
+                                    .okButtonLabel),
                                 onPressed: () {
                                   _deleteSelectedFeeds();
                                   Navigator.of(context).pop();

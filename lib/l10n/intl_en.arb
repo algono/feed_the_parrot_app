@@ -1,0 +1,129 @@
+{
+  "@@last_modified": "2020-11-19T17:05:11.573508",
+  "appTitle": "Feed the Parrot",
+  "@appTitle": {
+    "description": "Title for the application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "feedFormNewTitle": "New feed",
+  "@feedFormNewTitle": {
+    "description": "Title for the feed form when a new feed is being created",
+    "type": "text",
+    "placeholders": {}
+  },
+  "feedFormEditTitle": "Edit feed",
+  "@feedFormEditTitle": {
+    "description": "Title for the feed form when an existing feed is being edited",
+    "type": "text",
+    "placeholders": {}
+  },
+  "optionsTileTitle": "Options",
+  "@optionsTileTitle": {
+    "description": "Title of the options expansion tile in the feed form",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameField": "Name",
+  "@nameField": {
+    "description": "Name of the name field of a feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "languageField": "Language",
+  "@languageField": {
+    "description": "Name of the language field of a feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "englishLanguage": "English",
+  "@englishLanguage": {
+    "description": "Name of the english language",
+    "type": "text",
+    "placeholders": {}
+  },
+  "spanishLanguage": "Spanish",
+  "@spanishLanguage": {
+    "description": "Name of the spanish language",
+    "type": "text",
+    "placeholders": {}
+  },
+  "itemLimitField": "Item limit",
+  "@itemLimitField": {
+    "description": "Name of the item limit field of a feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "itemLimitHint": "Max number of items this feed should return",
+  "@itemLimitHint": {
+    "description": "Hint (explanation) of what the item limit field of a feed represents",
+    "type": "text",
+    "placeholders": {}
+  },
+  "truncateContentAtField": "Truncate content at",
+  "@truncateContentAtField": {
+    "description": "Name of the \"truncate content at\" field of a feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "truncateContentAtHint": "Max number of characters the content should have",
+  "@truncateContentAtHint": {
+    "description": "Hint (explanation) of what the \"truncate content at\" field of a feed represents",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteDialogConfirmationTitle": "Are you sure?",
+  "@deleteDialogConfirmationTitle": {
+    "description": "Title of the confirmation dialog on feed deletion",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteDialogConfirmationContent": "Are you sure you want to delete the following elements?",
+  "@deleteDialogConfirmationContent": {
+    "description": "Content of the confirmation dialog on feed deletion",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newButtonTooltip": "New",
+  "@newButtonTooltip": {
+    "description": "Tooltip for the button to add a new feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginButtonTooltip": "Login",
+  "@loginButtonTooltip": {
+    "description": "Tooltip for the login button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginInputHint": "Input the code you got from the Alexa skill",
+  "@loginInputHint": {
+    "description": "Hint for the login input",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginInputLabel": "Code",
+  "@loginInputLabel": {
+    "description": "Label for the login input",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginInputEmptyErrorMessage": "The code must not be empty",
+  "@loginInputEmptyErrorMessage": {
+    "description": "Error message for the login input when it is empty",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requiredValueErrorMessage": "Required",
+  "@requiredValueErrorMessage": {
+    "description": "Error message when a value is required",
+    "type": "text",
+    "placeholders": {}
+  },
+  "valueShouldBeANumberErrorMessage": "This should be a number",
+  "@valueShouldBeANumberErrorMessage": {
+    "description": "Error message when a value is not a number (and it should be one)",
+    "type": "text",
+    "placeholders": {}
+  }
+}

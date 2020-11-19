@@ -1,5 +1,6 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:feed_the_parrot/HomePage.dart';
+import 'package:feed_the_parrot/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -32,19 +33,19 @@ class _LoginFormState extends State<LoginForm> {
                 maxLength: 16,
                 validator: (value) {
                   if (value.isEmpty) {
-                    return 'The code must not be empty';
+                    return AppLocalizations.of(context).loginInputEmptyErrorMessage;
                   } else {
                     return null;
                   }
                 },
                 decoration: InputDecoration(
                   icon: Icon(Icons.vpn_key),
-                  hintText: 'Input the code you got from the Alexa skill',
-                  labelText: 'Code',
+                  hintText: AppLocalizations.of(context).loginInputHint,
+                  labelText: AppLocalizations.of(context).loginInputLabel,
                 ),
               ),
               RaisedButton(
-                child: Text('Login'),
+                child: Text(AppLocalizations.of(context).loginButtonTooltip),
                 onPressed: _isLoggingIn
                     ? null
                     : () async {
@@ -80,7 +81,6 @@ class _LoginFormState extends State<LoginForm> {
 
     Navigator.of(context).pushReplacement<Null, Null>(MaterialPageRoute<Null>(
         builder: (BuildContext context) => MyHomePage(
-              title: 'Feed the Parrot',
               user: userCredential.user,
             )));
   }
