@@ -227,6 +227,15 @@ class AppLocalizations {
     );
   }
 
+  String get noFeedNameProvidedErrorMessage {
+    return Intl.message(
+      'At least one name has to be provided',
+      name: 'noFeedNameProvidedErrorMessage',
+      desc: 'Error message when no feed name is being provided',
+      locale: localeName,
+    );
+  }
+
   String get invalidCodeErrorMessage {
     return Intl.message(
       'The code is not valid',

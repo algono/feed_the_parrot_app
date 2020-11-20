@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginInputLabel" : MessageLookupByLibrary.simpleMessage("Code"),
     "nameField" : MessageLookupByLibrary.simpleMessage("Name"),
     "newButtonTooltip" : MessageLookupByLibrary.simpleMessage("New"),
+    "noFeedNameProvidedErrorMessage" : MessageLookupByLibrary.simpleMessage("At least one name has to be provided"),
     "optionsTileTitle" : MessageLookupByLibrary.simpleMessage("Options"),
     "requiredValueErrorMessage" : MessageLookupByLibrary.simpleMessage("Required"),
     "spanishLanguage" : MessageLookupByLibrary.simpleMessage("Spanish"),

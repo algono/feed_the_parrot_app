@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-20T15:38:01.054362",
+  "@@last_modified": "2020-11-20T19:20:54.858701",
   "appTitle": "Feed the Parrot",
   "@appTitle": {
     "description": "Title for the application",
@@ -129,6 +129,12 @@
   "valueShouldBeUniqueErrorMessage": "This value already exists. Use another",
   "@valueShouldBeUniqueErrorMessage": {
     "description": "Error message when a value is not unique",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noFeedNameProvidedErrorMessage": "At least one name has to be provided",
+  "@noFeedNameProvidedErrorMessage": {
+    "description": "Error message when no feed name is being provided",
     "type": "text",
     "placeholders": {}
   },

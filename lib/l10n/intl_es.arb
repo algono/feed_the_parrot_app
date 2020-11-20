@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-20T15:38:01.054362",
+  "@@last_modified": "2020-11-20T19:20:54.858701",
   "appTitle": "Al Loro",
   "@appTitle": {
     "description": "Título de la aplicación",
@@ -129,6 +129,12 @@
   "valueShouldBeUniqueErrorMessage": "Este valor ya existe. Utiliza otro",
   "@valueShouldBeUniqueErrorMessage": {
     "description": "Mensaje de error cuando un valor no es único (es decir, está repetido)",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noFeedNameProvidedErrorMessage": "Debe tener al menos un nombre",
+  "@noFeedNameProvidedErrorMessage": {
+    "description": "Mensaje de error cuando a una feed no se le ha puesto ningún nombre",
     "type": "text",
     "placeholders": {}
   },

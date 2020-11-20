@@ -68,11 +68,17 @@ class _FeedFormState extends State<FeedForm> {
                   labelText: '🇺🇸 $nameField',
                 ),
                 validator: (value) {
-                  if (widget.namesEn.contains(value))
+                  if ((value == null || value.isEmpty) &&
+                      (nameEsController.text == null ||
+                          nameEsController.text.isEmpty)) {
+                    return AppLocalizations.of(context)
+                        .noFeedNameProvidedErrorMessage;
+                  } else if (widget.namesEn.contains(value)) {
                     return AppLocalizations.of(context)
                         .valueShouldBeUniqueErrorMessage;
-                  else
+                  } else {
                     return null;
+                  }
                 },
               ),
               SizedBox(height: 20.0),
@@ -85,11 +91,17 @@ class _FeedFormState extends State<FeedForm> {
                   labelText: '🇪🇸 $nameField',
                 ),
                 validator: (value) {
-                  if (widget.namesEs.contains(value))
+                  if ((value == null || value.isEmpty) &&
+                      (nameEnController.text == null ||
+                          nameEnController.text.isEmpty)) {
+                    return AppLocalizations.of(context)
+                        .noFeedNameProvidedErrorMessage;
+                  } else if (widget.namesEs.contains(value)) {
                     return AppLocalizations.of(context)
                         .valueShouldBeUniqueErrorMessage;
-                  else
+                  } else {
                     return null;
+                  }
                 },
               ),
               SizedBox(height: 20.0),
