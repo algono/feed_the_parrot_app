@@ -127,13 +127,21 @@ class _MyHomePageState extends State<MyHomePage> {
                                 .deleteDialogConfirmationTitle),
                             content: Text(
                                 '${AppLocalizations.of(context).deleteDialogConfirmationContent}\n\n' +
-                                    selectedFeeds.fold(
-                                        '',
-                                        (previousValue, element) =>
-                                            previousValue +
-                                            '- ' +
-                                            element.nameEn +
-                                            '\n')),
+                                    selectedFeeds.fold('',
+                                        (previousValue, element) {
+                                      String name;
+                                      if (element.nameEn != null &&
+                                          element.nameEn.isNotEmpty) {
+                                        name = element.nameEn;
+                                      }
+                                      if (name == null) {
+                                        name = element.nameEs;
+                                      } else if (element.nameEs != null &&
+                                          element.nameEs.isNotEmpty) {
+                                        name += ' / ${element.nameEs}';
+                                      }
+                                      return '$previousValue- $name\n';
+                                    })),
                             actions: [
                               FlatButton(
                                 child: Text(MaterialLocalizations.of(context)
