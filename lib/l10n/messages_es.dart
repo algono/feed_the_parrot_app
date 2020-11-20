@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "truncateContentAtField" : MessageLookupByLibrary.simpleMessage("Truncar contenido en"),
     "truncateContentAtHint" : MessageLookupByLibrary.simpleMessage("Máximo número de caracteres que debería tener el contenido"),
     "unknownErrorMessage" : MessageLookupByLibrary.simpleMessage("Ha habido un error"),
-    "valueShouldBeANumberErrorMessage" : MessageLookupByLibrary.simpleMessage("Esto debería ser un número")
+    "valueShouldBeANumberErrorMessage" : MessageLookupByLibrary.simpleMessage("Esto debería ser un número"),
+    "valueShouldBeUniqueErrorMessage" : MessageLookupByLibrary.simpleMessage("Este valor ya existe. Utiliza otro")
   };
 }

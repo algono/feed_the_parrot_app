@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-19T23:36:57.947804",
+  "@@last_modified": "2020-11-20T15:38:01.054362",
   "appTitle": "Al Loro",
   "@appTitle": {
     "description": "Título de la aplicación",
@@ -123,6 +123,12 @@
   "valueShouldBeANumberErrorMessage": "Esto debería ser un número",
   "@valueShouldBeANumberErrorMessage": {
     "description": "Mensaje de error cuando un valor no es un número (y debería serlo)",
+    "type": "text",
+    "placeholders": {}
+  },
+  "valueShouldBeUniqueErrorMessage": "Este valor ya existe. Utiliza otro",
+  "@valueShouldBeUniqueErrorMessage": {
+    "description": "Mensaje de error cuando un valor no es único (es decir, está repetido)",
     "type": "text",
     "placeholders": {}
   },

@@ -218,6 +218,15 @@ class AppLocalizations {
     );
   }
 
+  String get valueShouldBeUniqueErrorMessage {
+    return Intl.message(
+      'This value already exists. Use another',
+      name: 'valueShouldBeUniqueErrorMessage',
+      desc: 'Error message when a value is not unique',
+      locale: localeName,
+    );
+  }
+
   String get invalidCodeErrorMessage {
     return Intl.message(
       'The code is not valid',

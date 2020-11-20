@@ -7,12 +7,16 @@ import 'main.dart';
 class FeedForm extends StatefulWidget {
   final User user;
   final Feed feed;
+  final Set<String> namesEn, namesEs;
 
   String title(BuildContext context) => (feed == null)
       ? AppLocalizations.of(context).feedFormNewTitle
       : AppLocalizations.of(context).feedFormEditTitle;
 
-  FeedForm({this.user, this.feed});
+  FeedForm({this.user, this.feed, List<Feed> feedList})
+      : this.namesEn = feedList.map((feed) => feed.nameEn).toSet(),
+        this.namesEs = feedList.map((feed) => feed.nameEs).toSet();
+
   @override
   _FeedFormState createState() => _FeedFormState();
 }
@@ -52,6 +56,13 @@ class _FeedFormState extends State<FeedForm> {
                 decoration: InputDecoration(
                   labelText: '🇺🇸 $nameField',
                 ),
+                validator: (value) {
+                  if (widget.namesEn.contains(value))
+                    return AppLocalizations.of(context)
+                        .valueShouldBeUniqueErrorMessage;
+                  else
+                    return null;
+                },
               ),
               SizedBox(height: 20.0),
               TextFormField(
@@ -62,6 +73,13 @@ class _FeedFormState extends State<FeedForm> {
                 decoration: InputDecoration(
                   labelText: '🇪🇸 $nameField',
                 ),
+                validator: (value) {
+                  if (widget.namesEs.contains(value))
+                    return AppLocalizations.of(context)
+                        .valueShouldBeUniqueErrorMessage;
+                  else
+                    return null;
+                },
               ),
               SizedBox(height: 20.0),
               DropdownButtonFormField<String>(
@@ -112,8 +130,7 @@ class _FeedFormState extends State<FeedForm> {
               ),
               SizedBox(height: 20.0),
               ExpansionTile(
-                title: Text(AppLocalizations.of(context)
-                        .optionsTileTitle),
+                title: Text(AppLocalizations.of(context).optionsTileTitle),
                 children: [
                   TextFormField(
                     maxLines: 1,

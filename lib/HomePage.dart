@@ -14,7 +14,7 @@ class MyHomePage extends StatefulWidget {
   final User user;
 
   MyHomePage({Key key, this.user}) : super(key: key);
-  
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -92,7 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       columns: [
                         DataColumn(label: Text('🇺🇸 $nameField')),
                         DataColumn(label: Text('🇪🇸 $nameField')),
-                        DataColumn(label: Text(AppLocalizations.of(context).languageField)),
+                        DataColumn(
+                            label: Text(
+                                AppLocalizations.of(context).languageField)),
                         DataColumn(label: Text('URL')),
                       ],
                       rows: feeds
@@ -121,7 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                            title: Text(AppLocalizations.of(context).deleteDialogConfirmationTitle),
+                            title: Text(AppLocalizations.of(context)
+                                .deleteDialogConfirmationTitle),
                             content: Text(
                                 '${AppLocalizations.of(context).deleteDialogConfirmationContent}\n\n' +
                                     selectedFeeds.fold(
@@ -161,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Navigator.of(context)
         .push<dynamic>(MaterialPageRoute<dynamic>(
             builder: (BuildContext context) =>
-                FeedForm(user: widget.user, feed: feed)))
+                FeedForm(user: widget.user, feed: feed, feedList: feeds)))
         .then((modified) {
       if (modified == true) {
         setState(() {});

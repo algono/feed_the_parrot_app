@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-19T23:36:57.947804",
+  "@@last_modified": "2020-11-20T15:38:01.054362",
   "appTitle": "Feed the Parrot",
   "@appTitle": {
     "description": "Title for the application",
@@ -123,6 +123,12 @@
   "valueShouldBeANumberErrorMessage": "This should be a number",
   "@valueShouldBeANumberErrorMessage": {
     "description": "Error message when a value is not a number (and it should be one)",
+    "type": "text",
+    "placeholders": {}
+  },
+  "valueShouldBeUniqueErrorMessage": "This value already exists. Use another",
+  "@valueShouldBeUniqueErrorMessage": {
+    "description": "Error message when a value is not unique",
     "type": "text",
     "placeholders": {}
   },
