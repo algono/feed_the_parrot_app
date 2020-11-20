@@ -13,9 +13,20 @@ class FeedForm extends StatefulWidget {
       ? AppLocalizations.of(context).feedFormNewTitle
       : AppLocalizations.of(context).feedFormEditTitle;
 
+  static bool Function(String) _filterFeedNames(String currentFeedName) {
+    return (String element) =>
+        element != null && element.isNotEmpty && element != currentFeedName;
+  }
+
   FeedForm({this.user, this.feed, List<Feed> feedList})
-      : this.namesEn = feedList.map((feed) => feed.nameEn).toSet(),
-        this.namesEs = feedList.map((feed) => feed.nameEs).toSet();
+      : namesEn = feedList
+            .map((feed) => feed.nameEn)
+            .where(_filterFeedNames(feed?.nameEn))
+            .toSet(),
+        namesEs = feedList
+            .map((feed) => feed.nameEs)
+            .where(_filterFeedNames(feed?.nameEs))
+            .toSet();
 
   @override
   _FeedFormState createState() => _FeedFormState();
