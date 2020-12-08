@@ -137,6 +137,15 @@ class AppLocalizations {
     );
   }
 
+  String get readFullContentField {
+    return Intl.message(
+      'Read full content',
+      name: 'readFullContentField',
+      desc: 'Name of the "read full content" field of a feed',
+      locale: localeName,
+    );
+  }
+
   String get deleteDialogConfirmationTitle {
     return Intl.message(
       'Are you sure?',

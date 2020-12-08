@@ -17,7 +17,8 @@ class FeedDB {
       urlAttribute = "url";
 
   static const String itemLimitAttribute = "itemLimit",
-      truncateContentAtAttribute = "truncateContentAt";
+      truncateContentAtAttribute = "truncateContentAt",
+      readFullContentAttribute = "readFullContent";
 }
 
 class Feed extends DBComponent {
@@ -27,6 +28,7 @@ class Feed extends DBComponent {
 
   int itemLimit;
   int truncateContentAt;
+  bool readFullContent;
 
   Feed(
       {String userId,
@@ -35,7 +37,8 @@ class Feed extends DBComponent {
       this.language,
       @required this.url,
       this.itemLimit,
-      this.truncateContentAt})
+      this.truncateContentAt,
+      this.readFullContent})
       : super(
             collection: userId == null
                 ? FeedDB.publicCollectionName
@@ -74,6 +77,7 @@ class Feed extends DBComponent {
 
     this.itemLimit = data[FeedDB.itemLimitAttribute];
     this.truncateContentAt = data[FeedDB.truncateContentAtAttribute];
+    this.readFullContent = data[FeedDB.readFullContentAttribute];
   }
 
   @override
@@ -87,6 +91,7 @@ class Feed extends DBComponent {
 
     map[FeedDB.itemLimitAttribute] = this.itemLimit;
     map[FeedDB.truncateContentAtAttribute] = this.truncateContentAt;
+    map[FeedDB.readFullContentAttribute] = this.readFullContent;
 
     return map;
   }

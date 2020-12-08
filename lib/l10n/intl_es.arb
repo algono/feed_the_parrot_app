@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-20T19:20:54.858701",
+  "@@last_modified": "2020-12-08T17:39:24.952140",
   "appTitle": "Al Loro",
   "@appTitle": {
     "description": "Título de la aplicación",
@@ -69,6 +69,12 @@
   "truncateContentAtHint": "Máximo número de caracteres que debería tener el contenido",
   "@truncateContentAtHint": {
     "description": "Pista (explicación) sobre qué representa el campo \"truncar contenido en\" de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "readFullContentField": "Leer contenido completo",
+  "@readFullContentField": {
+    "description": "Nombre del campo \"leer contenido completo\" de una feed",
     "type": "text",
     "placeholders": {}
   },

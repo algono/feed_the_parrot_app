@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-20T19:20:54.858701",
+  "@@last_modified": "2020-12-08T17:39:24.952140",
   "appTitle": "Feed the Parrot",
   "@appTitle": {
     "description": "Title for the application",
@@ -69,6 +69,12 @@
   "truncateContentAtHint": "Max number of characters the content should have",
   "@truncateContentAtHint": {
     "description": "Hint (explanation) of what the \"truncate content at\" field of a feed represents",
+    "type": "text",
+    "placeholders": {}
+  },
+  "readFullContentField": "Read full content",
+  "@readFullContentField": {
+    "description": "Name of the \"read full content\" field of a feed",
     "type": "text",
     "placeholders": {}
   },

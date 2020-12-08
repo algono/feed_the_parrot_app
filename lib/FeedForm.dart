@@ -41,6 +41,7 @@ class _FeedFormState extends State<FeedForm> {
   final truncateContentAtController = TextEditingController();
 
   String languageValue;
+  bool readFullContentValue;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -190,6 +191,19 @@ class _FeedFormState extends State<FeedForm> {
                         return null;
                     },
                   ),
+                  Row(
+                    children: [
+                      Checkbox(
+                          value: readFullContentValue,
+                          onChanged: (value) {
+                            setState(() {
+                              readFullContentValue = value;
+                            });
+                          }),
+                      SizedBox(width: 10.0),
+                      Text(AppLocalizations.of(context).readFullContentField),
+                    ],
+                  )
                 ],
               ),
               SizedBox(height: 10.0),
@@ -248,18 +262,19 @@ class _FeedFormState extends State<FeedForm> {
 
   Future<void> createFeed() {
     return Feed(
-            userId: widget.user?.uid,
-            nameEn: nameEnController.text.toLowerCase(),
-            nameEs: nameEsController.text.toLowerCase(),
-            language: languageValue,
-            url: urlController.text,
-            itemLimit: itemLimitController.text.isEmpty
-                ? null
-                : int.parse(itemLimitController.text),
-            truncateContentAt: truncateContentAtController.text.isEmpty
-                ? null
-                : int.parse(truncateContentAtController.text))
-        .create();
+      userId: widget.user?.uid,
+      nameEn: nameEnController.text.toLowerCase(),
+      nameEs: nameEsController.text.toLowerCase(),
+      language: languageValue,
+      url: urlController.text,
+      itemLimit: itemLimitController.text.isEmpty
+          ? null
+          : int.parse(itemLimitController.text),
+      truncateContentAt: truncateContentAtController.text.isEmpty
+          ? null
+          : int.parse(truncateContentAtController.text),
+      readFullContent: readFullContentValue,
+    ).create();
   }
 
   Future<void> editFeed() {
@@ -274,6 +289,8 @@ class _FeedFormState extends State<FeedForm> {
     widget.feed.truncateContentAt = truncateContentAtController.text.isEmpty
         ? null
         : int.parse(truncateContentAtController.text);
+
+    widget.feed.readFullContent = readFullContentValue;
 
     return widget.feed.update();
   }
@@ -290,6 +307,8 @@ class _FeedFormState extends State<FeedForm> {
       itemLimitController.text = widget.feed.itemLimit?.toString() ?? '';
       truncateContentAtController.text =
           widget.feed.truncateContentAt?.toString() ?? '';
+
+      readFullContentValue = widget.feed.readFullContent;
     }
   }
 
