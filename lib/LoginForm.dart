@@ -1,8 +1,10 @@
-import 'package:cloud_functions/cloud_functions.dart';
+import 'dart:io';
+
 import 'package:feed_the_parrot/HomePage.dart';
 import 'package:feed_the_parrot/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class LoginForm extends StatefulWidget {
   @override
@@ -72,30 +74,29 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  Future _signInWithCode(BuildContext context, String code) async {
-    var signInWithAuthCode =
-        FirebaseFunctions.instance.httpsCallable('signInWithAuthCode');
+  static const String LOGIN_API_URL = '';
 
-    try {
-      var token = await signInWithAuthCode.call(<String, dynamic>{
-        'code': code,
-      });
+  Future _signInWithCode(BuildContext context, String code) async {
+    var response = await http.get('$LOGIN_API_URL/$code');
+
+    if (response.statusCode == HttpStatus.ok) {
+      String token = response.body;
 
       UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithCustomToken(token.data);
+          await FirebaseAuth.instance.signInWithCustomToken(token);
 
       Navigator.of(context).pushReplacement<Null, Null>(MaterialPageRoute<Null>(
           builder: (BuildContext context) => MyHomePage(
                 user: userCredential.user,
               )));
-    } on FirebaseFunctionsException catch (ex) {
+    } else {
       var localizations = AppLocalizations.of(context);
       String message;
-      switch (ex.code) {
-        case 'unauthenticated':
+      switch (response.statusCode) {
+        case HttpStatus.unauthorized:
           message = localizations.invalidCodeErrorMessage;
           break;
-        case 'out-of-range':
+        case HttpStatus.requestedRangeNotSatisfiable:
           message = localizations.expiredCodeErrorMessage;
           break;
         default:
