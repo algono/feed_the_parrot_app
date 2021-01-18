@@ -74,10 +74,13 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  static const String LOGIN_API_URL = '';
+  // Usage: flutter (run|build) --dart-define=LOGIN_API_URL=somevalue --dart-define=LOGIN_API_KEY=othervalue
+  static const String LOGIN_API_URL = String.fromEnvironment('LOGIN_API_URL'),
+      LOGIN_API_KEY = String.fromEnvironment('LOGIN_API_KEY');
 
   Future _signInWithCode(BuildContext context, String code) async {
-    var response = await http.get('$LOGIN_API_URL/$code');
+    var response = await http
+        .get('$LOGIN_API_URL/$code', headers: {'X-API-KEY': LOGIN_API_KEY});
 
     if (response.statusCode == HttpStatus.ok) {
       String token = response.body;
