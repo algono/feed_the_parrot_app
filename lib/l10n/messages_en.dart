@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "appTitle" : MessageLookupByLibrary.simpleMessage("Feed the Parrot"),
+    "conflictCodeErrorMessage" : MessageLookupByLibrary.simpleMessage("There was an error with the code. Please generate another and try again."),
     "deleteDialogConfirmationContent" : MessageLookupByLibrary.simpleMessage("Are you sure you want to delete the following elements?"),
     "deleteDialogConfirmationTitle" : MessageLookupByLibrary.simpleMessage("Are you sure?"),
     "englishLanguage" : MessageLookupByLibrary.simpleMessage("English"),

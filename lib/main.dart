@@ -27,6 +27,14 @@ class AppLocalizations {
 
   final String localeName;
 
+  /*
+   Rebuilding messages:
+   Step 1: flutter pub run intl_translation:extract_to_arb --output-dir=lib/l10n lib/main.dart
+   Step 2: flutter pub run intl_translation:generate_from_arb \
+    --output-dir=lib/l10n --no-use-deferred-loading \
+    lib/main.dart lib/l10n/intl_*.arb
+  */
+
   String get appTitle {
     return Intl.message(
       'Feed the Parrot',
@@ -250,6 +258,15 @@ class AppLocalizations {
       'The code has expired',
       name: 'expiredCodeErrorMessage',
       desc: 'Error message when the login code has expired',
+      locale: localeName,
+    );
+  }
+
+  String get conflictCodeErrorMessage {
+    return Intl.message(
+      'There was an error with the code. Please generate another and try again.',
+      name: 'conflictCodeErrorMessage',
+      desc: 'Error message when the login code has entered in conflict between several users',
       locale: localeName,
     );
   }

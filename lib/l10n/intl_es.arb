@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-20T19:20:54.858701",
+  "@@last_modified": "2021-02-27T04:56:42.274013",
   "appTitle": "Al Loro",
   "@appTitle": {
     "description": "Título de la aplicación",
@@ -147,6 +147,12 @@
   "expiredCodeErrorMessage": "El código ha expirado",
   "@expiredCodeErrorMessage": {
     "description": "Mensaje de error cuando el código de inicio de sesión ha expirado",
+    "type": "text",
+    "placeholders": {}
+  },
+  "conflictCodeErrorMessage": "Hubo un error con el código. Por favor, genere otro y vuelva a intentarlo.",
+  "@conflictCodeErrorMessage": {
+    "description": "Mensaje de error cuando el código de inicio de sesión ha entrado en conflicto entre varios usuarios",
     "type": "text",
     "placeholders": {}
   },

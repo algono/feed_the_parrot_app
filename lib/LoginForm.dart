@@ -93,6 +93,8 @@ class _LoginFormState extends State<LoginForm> {
                 user: userCredential.user,
               )));
     } else {
+      print("${response.statusCode} - ${response.body}");
+
       var localizations = AppLocalizations.of(context);
       String message;
       switch (response.statusCode) {
@@ -101,6 +103,9 @@ class _LoginFormState extends State<LoginForm> {
           break;
         case HttpStatus.requestedRangeNotSatisfiable:
           message = localizations.expiredCodeErrorMessage;
+          break;
+        case HttpStatus.conflict:
+          message = localizations.conflictCodeErrorMessage;
           break;
         default:
           message = localizations.unknownErrorMessage;

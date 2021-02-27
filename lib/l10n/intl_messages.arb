@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-11-20T19:20:54.858701",
+  "@@last_modified": "2021-02-27T04:56:42.274013",
   "appTitle": "Feed the Parrot",
   "@appTitle": {
     "description": "Title for the application",
@@ -147,6 +147,12 @@
   "expiredCodeErrorMessage": "The code has expired",
   "@expiredCodeErrorMessage": {
     "description": "Error message when the login code has expired",
+    "type": "text",
+    "placeholders": {}
+  },
+  "conflictCodeErrorMessage": "There was an error with the code. Please generate another and try again.",
+  "@conflictCodeErrorMessage": {
+    "description": "Error message when the login code has entered in conflict between several users",
     "type": "text",
     "placeholders": {}
   },
