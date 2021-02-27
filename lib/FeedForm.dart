@@ -41,7 +41,7 @@ class _FeedFormState extends State<FeedForm> {
   final truncateContentAtController = TextEditingController();
 
   String languageValue;
-  bool readFullContentValue;
+  bool readFullContentValue = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -308,7 +308,7 @@ class _FeedFormState extends State<FeedForm> {
       truncateContentAtController.text =
           widget.feed.truncateContentAt?.toString() ?? '';
 
-      readFullContentValue = widget.feed.readFullContent;
+      readFullContentValue = widget.feed.readFullContent ?? false;
     }
   }
 
