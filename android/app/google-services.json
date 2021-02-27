@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "726519280269",
-    "firebase_url": "https://feedtheparrot-rss.firebaseio.com",
-    "project_id": "feedtheparrot-rss",
-    "storage_bucket": "feedtheparrot-rss.appspot.com"
+    "project_number": "175283920101",
+    "project_id": "feedtheparrot-rss-39242",
+    "storage_bucket": "feedtheparrot-rss-39242.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:726519280269:android:8991d793a45048c37968c4",
+        "mobilesdk_app_id": "1:175283920101:android:321dff84c73ba295e6880c",
         "android_client_info": {
           "package_name": "com.algono.feed_the_parrot"
         }
       },
       "oauth_client": [
         {
-          "client_id": "726519280269-7a6vrne1bmhsh4cgakjo1cmq4drdadp5.apps.googleusercontent.com",
+          "client_id": "175283920101-r5tvdrl5vh40pmap9ob47neo6hm7huuf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyALUzUeAtIvtHRLr91cI9GlHDEt-vg3bQM"
+          "current_key": "AIzaSyC8qiLo0rfokIHejRfksJL0o6nQFNCbuAE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "726519280269-7a6vrne1bmhsh4cgakjo1cmq4drdadp5.apps.googleusercontent.com",
+              "client_id": "175283920101-r5tvdrl5vh40pmap9ob47neo6hm7huuf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
