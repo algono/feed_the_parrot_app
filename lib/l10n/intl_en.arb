@@ -72,6 +72,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "readFullContentField": "Read full content",
+  "@readFullContentField": {
+    "description": "Name of the \"read full content\" field of a feed",
+    "type": "text",
+    "placeholders": {}
+  },
   "deleteDialogConfirmationTitle": "Are you sure?",
   "@deleteDialogConfirmationTitle": {
     "description": "Title of the confirmation dialog on feed deletion",

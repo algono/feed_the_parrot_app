@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "newButtonTooltip" : MessageLookupByLibrary.simpleMessage("Nueva"),
     "noFeedNameProvidedErrorMessage" : MessageLookupByLibrary.simpleMessage("Debe tener al menos un nombre"),
     "optionsTileTitle" : MessageLookupByLibrary.simpleMessage("Opciones"),
+    "readFullContentField" : MessageLookupByLibrary.simpleMessage("Leer contenido completo"),
     "requiredValueErrorMessage" : MessageLookupByLibrary.simpleMessage("Requerido"),
     "spanishLanguage" : MessageLookupByLibrary.simpleMessage("Español"),
     "truncateContentAtField" : MessageLookupByLibrary.simpleMessage("Truncar contenido en"),

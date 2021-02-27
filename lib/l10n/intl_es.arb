@@ -72,6 +72,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "readFullContentField": "Leer contenido completo",
+  "@readFullContentField": {
+    "description": "Nombre del campo \"leer contenido completo\" de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
   "deleteDialogConfirmationTitle": "¿Estás seguro?",
   "@deleteDialogConfirmationTitle": {
     "description": "Título del diálogo de confirmación cuando se borra una feed",
