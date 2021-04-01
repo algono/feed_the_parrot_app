@@ -214,7 +214,7 @@ class _FeedFormState extends State<FeedForm> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Filters',
+                            AppLocalizations.of(context).filtersFieldGroup,
                             textScaleFactor: 1.1,
                           ),
                           SizedBox(
@@ -224,7 +224,7 @@ class _FeedFormState extends State<FeedForm> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Text',
+                                AppLocalizations.of(context).filterTextField,
                                 style: TextStyle(color: Colors.grey.shade600),
                               ),
                               FilterEditor(
@@ -232,7 +232,8 @@ class _FeedFormState extends State<FeedForm> {
                               ),
                               SizedBox(height: 10.0),
                               Text(
-                                'Category',
+                                AppLocalizations.of(context)
+                                    .filterCategoryField,
                                 style: TextStyle(color: Colors.grey.shade600),
                               ),
                               FilterEditor(
@@ -355,8 +356,7 @@ class _FeedFormState extends State<FeedForm> {
 
       filterText.values = Set.from(widget.feed.filterText.values) ?? [];
       filterText.matchAll = widget.feed.filterText.matchAll ?? false;
-      filterCategory.values =
-          Set.from(widget.feed.filterCategory.values) ?? [];
+      filterCategory.values = Set.from(widget.feed.filterCategory.values) ?? [];
       filterCategory.matchAll = widget.feed.filterCategory.matchAll ?? false;
     }
   }
@@ -400,7 +400,7 @@ class _FilterEditorState extends State<FilterEditor> {
                     });
                   },
                 ),
-                Text('Any')
+                Text(AppLocalizations.of(context).filterMatchAny)
               ],
             ),
             Row(
@@ -414,7 +414,7 @@ class _FilterEditorState extends State<FilterEditor> {
                     });
                   },
                 ),
-                Text('All')
+                Text(AppLocalizations.of(context).filterMatchAll)
               ],
             ),
           ],
@@ -425,7 +425,9 @@ class _FilterEditorState extends State<FilterEditor> {
               child: TextField(
                 controller: newValueController,
                 maxLines: 1,
-                decoration: InputDecoration(labelText: 'Word', labelStyle: TextStyle(fontSize: 14.0)),
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).filterWordField,
+                    labelStyle: TextStyle(fontSize: 14.0)),
               ),
             ),
             IconButton(

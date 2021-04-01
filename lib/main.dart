@@ -154,6 +154,42 @@ class AppLocalizations {
     );
   }
 
+  String get filtersFieldGroup {
+    return Intl.message('Filters',
+        name: 'filtersFieldGroup',
+        desc: 'Name of the group formed by fields associated with filters');
+  }
+
+  String get filterTextField {
+    return Intl.message('Text',
+        name: 'filterTextField',
+        desc:
+            'Name of the field with words that should be present within the text to be shown');
+  }
+
+  String get filterCategoryField {
+    return Intl.message('Category',
+        name: 'filterCategoryField',
+        desc:
+            'Name of the field with words that should be present in the list of categories');
+  }
+
+  String get filterMatchAny {
+    return Intl.message('Any',
+        name: 'filterMatchAny', desc: 'In a filter, match if any word matches');
+  }
+
+  String get filterMatchAll {
+    return Intl.message('All',
+        name: 'filterMatchAll', desc: 'In a filter, match if all words match');
+  }
+
+  String get filterWordField {
+    return Intl.message('Word',
+        name: 'filterWordField',
+        desc: 'In a filter, name of the field to add new words');
+  }
+
   String get deleteDialogConfirmationTitle {
     return Intl.message(
       'Are you sure?',
@@ -275,7 +311,8 @@ class AppLocalizations {
     return Intl.message(
       'There was an error with the code. Please generate another and try again.',
       name: 'conflictCodeErrorMessage',
-      desc: 'Error message when the login code has entered in conflict between several users',
+      desc:
+          'Error message when the login code has entered in conflict between several users',
       locale: localeName,
     );
   }

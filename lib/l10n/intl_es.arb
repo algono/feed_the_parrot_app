@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-02-27T04:56:42.274013",
+  "@@last_modified": "2021-04-01T03:47:04.485174",
   "appTitle": "Al Loro",
   "@appTitle": {
     "description": "Título de la aplicación",
@@ -75,6 +75,42 @@
   "readFullContentField": "Leer contenido completo",
   "@readFullContentField": {
     "description": "Nombre del campo \"leer contenido completo\" de una feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filtersFieldGroup": "Filtros",
+  "@filtersFieldGroup": {
+    "description": "Nombre del grupo formado por campos asociados con filtros",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterTextField": "Texto",
+  "@filterTextField": {
+    "description": "Nombre del campo con palabras que deberían estar presentes en el texto que se mostrará",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterCategoryField": "Categoría",
+  "@filterCategoryField": {
+    "description": "Nombre del campo con palabras que deberían estar presentes en la lista de categorías",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterMatchAny": "Cualquiera",
+  "@filterMatchAny": {
+    "description": "En un filtro, marca como coincidencia si coincide con cualquier palabra",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterMatchAll": "Todo",
+  "@filterMatchAll": {
+    "description": "En un filtro, marca como coincidencia sólo si coincide con todas las palabras",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterWordField": "Palabra",
+  "@filterWordField": {
+    "description": "En un filtro, nombre del campo donde añadir nuevas palabras",
     "type": "text",
     "placeholders": {}
   },

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-02-27T04:56:42.274013",
+  "@@last_modified": "2021-04-01T03:47:04.485174",
   "appTitle": "Feed the Parrot",
   "@appTitle": {
     "description": "Title for the application",
@@ -75,6 +75,42 @@
   "readFullContentField": "Read full content",
   "@readFullContentField": {
     "description": "Name of the \"read full content\" field of a feed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filtersFieldGroup": "Filters",
+  "@filtersFieldGroup": {
+    "description": "Name of the group formed by fields associated with filters",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterTextField": "Text",
+  "@filterTextField": {
+    "description": "Name of the field with words that should be present within the text to be shown",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterCategoryField": "Category",
+  "@filterCategoryField": {
+    "description": "Name of the field with words that should be present in the list of categories",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterMatchAny": "Any",
+  "@filterMatchAny": {
+    "description": "In a filter, match if any word matches",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterMatchAll": "All",
+  "@filterMatchAll": {
+    "description": "In a filter, match if all words match",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filterWordField": "Word",
+  "@filterWordField": {
+    "description": "In a filter, name of the field to add new words",
     "type": "text",
     "placeholders": {}
   },
