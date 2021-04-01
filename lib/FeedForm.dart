@@ -435,6 +435,7 @@ class _FilterEditorState extends State<FilterEditor> {
                 onPressed: () {
                   setState(() {
                     this.widget.filter.values.add(newValueController.text);
+                    newValueController.clear();
                   });
                 }),
           ],
