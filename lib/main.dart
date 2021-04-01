@@ -155,39 +155,59 @@ class AppLocalizations {
   }
 
   String get filtersFieldGroup {
-    return Intl.message('Filters',
-        name: 'filtersFieldGroup',
-        desc: 'Name of the group formed by fields associated with filters');
+    return Intl.message(
+      'Filters',
+      name: 'filtersFieldGroup',
+      desc: 'Name of the group formed by fields associated with filters',
+      locale: localeName,
+    );
   }
 
   String get filterTextField {
-    return Intl.message('Text',
-        name: 'filterTextField',
-        desc:
-            'Name of the field with words that should be present within the text to be shown');
+    return Intl.message(
+      'Text',
+      name: 'filterTextField',
+      desc:
+          'Name of the field with words that should be present within the text to be shown',
+      locale: localeName,
+    );
   }
 
   String get filterCategoryField {
-    return Intl.message('Category',
-        name: 'filterCategoryField',
-        desc:
-            'Name of the field with words that should be present in the list of categories');
+    return Intl.message(
+      'Category',
+      name: 'filterCategoryField',
+      desc:
+          'Name of the field with words that should be present in the list of categories',
+      locale: localeName,
+    );
   }
 
   String get filterMatchAny {
-    return Intl.message('Any',
-        name: 'filterMatchAny', desc: 'In a filter, match if any word matches');
+    return Intl.message(
+      'Any',
+      name: 'filterMatchAny',
+      desc: 'In a filter, match if any word matches',
+      locale: localeName,
+    );
   }
 
   String get filterMatchAll {
-    return Intl.message('All',
-        name: 'filterMatchAll', desc: 'In a filter, match if all words match');
+    return Intl.message(
+      'All',
+      name: 'filterMatchAll',
+      desc: 'In a filter, match if all words match',
+      locale: localeName,
+    );
   }
 
   String get filterWordField {
-    return Intl.message('Word',
-        name: 'filterWordField',
-        desc: 'In a filter, name of the field to add new words');
+    return Intl.message(
+      'Word',
+      name: 'filterWordField',
+      desc: 'In a filter, name of the field to add new words',
+      locale: localeName,
+    );
   }
 
   String get deleteDialogConfirmationTitle {
