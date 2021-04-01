@@ -43,6 +43,8 @@ class _FeedFormState extends State<FeedForm> {
   String languageValue;
   bool readFullContentValue = false;
 
+  Filter filterText = Filter(), filterCategory = Filter();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -200,10 +202,46 @@ class _FeedFormState extends State<FeedForm> {
                               readFullContentValue = value;
                             });
                           }),
-                      SizedBox(width: 10.0),
                       Text(AppLocalizations.of(context).readFullContentField),
                     ],
-                  )
+                  ),
+                  Container(
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(1),
+                          border: Border.all(color: Colors.grey.shade300)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Filters',
+                            textScaleFactor: 1.1,
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Text',
+                                style: TextStyle(color: Colors.grey.shade600),
+                              ),
+                              FilterEditor(
+                                filter: filterText,
+                              ),
+                              SizedBox(height: 10.0),
+                              Text(
+                                'Category',
+                                style: TextStyle(color: Colors.grey.shade600),
+                              ),
+                              FilterEditor(
+                                filter: filterCategory,
+                              ),
+                            ],
+                          )
+                        ],
+                      ))
                 ],
               ),
               SizedBox(height: 10.0),
@@ -274,6 +312,8 @@ class _FeedFormState extends State<FeedForm> {
           ? null
           : int.parse(truncateContentAtController.text),
       readFullContent: readFullContentValue,
+      filterCategory: filterCategory,
+      filterText: filterText,
     ).create();
   }
 
@@ -292,6 +332,9 @@ class _FeedFormState extends State<FeedForm> {
 
     widget.feed.readFullContent = readFullContentValue;
 
+    widget.feed.filterCategory = filterCategory;
+    widget.feed.filterText = filterText;
+
     return widget.feed.update();
   }
 
@@ -309,6 +352,12 @@ class _FeedFormState extends State<FeedForm> {
           widget.feed.truncateContentAt?.toString() ?? '';
 
       readFullContentValue = widget.feed.readFullContent ?? false;
+
+      filterText.values = Set.from(widget.feed.filterText.values) ?? [];
+      filterText.matchAll = widget.feed.filterText.matchAll ?? false;
+      filterCategory.values =
+          Set.from(widget.feed.filterCategory.values) ?? [];
+      filterCategory.matchAll = widget.feed.filterCategory.matchAll ?? false;
     }
   }
 
@@ -319,5 +368,104 @@ class _FeedFormState extends State<FeedForm> {
     urlController.dispose();
 
     super.dispose();
+  }
+}
+
+class FilterEditor extends StatefulWidget {
+  final Filter filter;
+
+  FilterEditor({@required this.filter});
+
+  @override
+  _FilterEditorState createState() => _FilterEditorState();
+}
+
+class _FilterEditorState extends State<FilterEditor> {
+  TextEditingController newValueController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Row(
+              children: [
+                Radio(
+                  groupValue: true,
+                  value: !this.widget.filter.matchAll,
+                  onChanged: (bool value) {
+                    setState(() {
+                      this.widget.filter.matchAll = false;
+                    });
+                  },
+                ),
+                Text('Any')
+              ],
+            ),
+            Row(
+              children: [
+                Radio(
+                  groupValue: true,
+                  value: this.widget.filter.matchAll,
+                  onChanged: (bool value) {
+                    setState(() {
+                      this.widget.filter.matchAll = true;
+                    });
+                  },
+                ),
+                Text('All')
+              ],
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: newValueController,
+                maxLines: 1,
+                decoration: InputDecoration(labelText: 'Word', labelStyle: TextStyle(fontSize: 14.0)),
+              ),
+            ),
+            IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  setState(() {
+                    this.widget.filter.values.add(newValueController.text);
+                  });
+                }),
+          ],
+        ),
+        SizedBox(height: 5.0),
+        Container(
+          child: Builder(
+            builder: (context) {
+              return Column(
+                children: this.widget.filter.values.map((value) {
+                  return Dismissible(
+                    background: Container(
+                      color: Colors.red,
+                    ),
+                    key: Key(value),
+                    onDismissed: (direction) {
+                      setState(() {
+                        this.widget.filter.values.remove(value);
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(1),
+                          border: Border.all(color: Colors.grey.shade400)),
+                      child: ListTile(title: Text(value)),
+                    ),
+                  );
+                }).toList(),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

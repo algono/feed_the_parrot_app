@@ -19,6 +19,18 @@ class FeedDB {
   static const String itemLimitAttribute = "itemLimit",
       truncateContentAtAttribute = "truncateContentAt",
       readFullContentAttribute = "readFullContent";
+
+  static const String filterTextAttribute = "filterByText",
+      filterTextMatchAttribute = "filterByTextMatchAll",
+      filterCategoryAttribute = "filterByCategory",
+      filterCategoryMatchAttribute = "filterByCategoryMatchAll";
+}
+
+class Filter {
+  Set<String> values = Set();
+  bool matchAll = false;
+
+  Filter({this.values, this.matchAll});
 }
 
 class Feed extends DBComponent {
@@ -30,16 +42,21 @@ class Feed extends DBComponent {
   int truncateContentAt;
   bool readFullContent;
 
-  Feed(
-      {String userId,
-      this.nameEn,
-      this.nameEs,
-      this.language,
-      @required this.url,
-      this.itemLimit,
-      this.truncateContentAt,
-      this.readFullContent})
-      : super(
+  Filter filterText;
+  Filter filterCategory;
+
+  Feed({
+    String userId,
+    this.nameEn,
+    this.nameEs,
+    this.language,
+    @required this.url,
+    this.itemLimit,
+    this.truncateContentAt,
+    this.readFullContent,
+    this.filterText,
+    this.filterCategory,
+  }) : super(
             collection: userId == null
                 ? FeedDB.publicCollectionName
                 : FeedDB.getCollectionNameFromUser(userId));
@@ -78,6 +95,20 @@ class Feed extends DBComponent {
     this.itemLimit = data[FeedDB.itemLimitAttribute];
     this.truncateContentAt = data[FeedDB.truncateContentAtAttribute];
     this.readFullContent = data[FeedDB.readFullContentAttribute];
+
+    this.filterCategory = Filter(
+      values: (data[FeedDB.filterCategoryAttribute] as List)
+          ?.map((e) => e as String)
+          ?.toSet(),
+      matchAll: data[FeedDB.filterCategoryMatchAttribute] ?? false,
+    );
+
+    this.filterText = Filter(
+      values: (data[FeedDB.filterTextAttribute] as List)
+          ?.map((e) => e as String)
+          ?.toSet(),
+      matchAll: data[FeedDB.filterTextMatchAttribute] ?? false,
+    );
   }
 
   @override
@@ -92,6 +123,11 @@ class Feed extends DBComponent {
     map[FeedDB.itemLimitAttribute] = this.itemLimit;
     map[FeedDB.truncateContentAtAttribute] = this.truncateContentAt;
     map[FeedDB.readFullContentAttribute] = this.readFullContent;
+
+    map[FeedDB.filterCategoryAttribute] = this.filterCategory.values.toList();
+    map[FeedDB.filterCategoryMatchAttribute] = this.filterCategory.matchAll;
+    map[FeedDB.filterTextAttribute] = this.filterText.values.toList();
+    map[FeedDB.filterTextMatchAttribute] = this.filterText.matchAll;
 
     return map;
   }
