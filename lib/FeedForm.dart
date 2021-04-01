@@ -354,9 +354,9 @@ class _FeedFormState extends State<FeedForm> {
 
       readFullContentValue = widget.feed.readFullContent ?? false;
 
-      filterText.values = Set.from(widget.feed.filterText.values) ?? [];
+      filterText.values = Set.from(widget.feed.filterText.values ?? []);
       filterText.matchAll = widget.feed.filterText.matchAll ?? false;
-      filterCategory.values = Set.from(widget.feed.filterCategory.values) ?? [];
+      filterCategory.values = Set.from(widget.feed.filterCategory.values ?? []);
       filterCategory.matchAll = widget.feed.filterCategory.matchAll ?? false;
     }
   }
