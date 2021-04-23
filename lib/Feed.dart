@@ -27,10 +27,10 @@ class FeedDB {
 }
 
 class Filter {
-  Set<String> values = Set();
-  bool matchAll = false;
+  Set<String> values;
+  bool matchAll;
 
-  Filter({this.values, this.matchAll});
+  Filter({Set<String> values, this.matchAll = false}) : this.values = values ?? Set();
 }
 
 class Feed extends DBComponent {
