@@ -1,16 +1,17 @@
-# feed_the_parrot
+# Al Loro / Feed The Parrot (App)
 
-A new Flutter project.
+:es: Esta es una app compañera (hecha en Flutter) para gestionar feeds que usa mi lector de feeds RSS (creado como una skill para Alexa).
+Todo esto fue diseñado para mi Trabajo de Fin de Grado (TFG).
 
-## Getting Started
+:uk: This is a companion app (made in Flutter) to manage feeds used by my RSS feed reader skill for Alexa.
+All this was made for my final degree project (TFG).
 
-This project is a starting point for a Flutter application.
+## Enlaces relacionados / Related links
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Skill](https://github.com/algono/FeedTheParrot-RSS)
+- [Autenticación / Auth](https://github.com/algono/feed-the-parrot-auth)
+- [(Antigua) Autenticación / (Old) Auth](https://github.com/algono/feed-the-parrot-auth-old)
+- Memoria / Paper
+  - PDF (aún no está disponible / not available yet)
+  - [Fuente / Source](https://github.com/algono/feed-the-parrot-memoria)
+- [Defensa / Presentation](https://github.com/algono/feed-the-parrot-defensa)
